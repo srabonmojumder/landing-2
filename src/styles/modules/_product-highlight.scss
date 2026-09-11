@@ -1,204 +1,322 @@
 @use "../abstracts/tokens" as *;
 
 .product-highlight-section {
-  padding: 40px 0 60px 0;
-  background-color: $bg-white;
+  padding: 70px 0 80px 0;
+  background-color: #ffffff;
   position: relative;
 
   .highlight-grid {
     display: grid;
     grid-template-columns: 1.15fr 0.85fr;
-    gap: 40px;
+    gap: 48px;
     align-items: center;
 
-    @media (max-width: 868px) {
+    @media (max-width: 992px) {
       grid-template-columns: 1fr;
-      text-align: center;
-      gap: 32px;
+      gap: 40px;
     }
   }
 
+  // Left Details Column
   .product-details {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-
-    @media (max-width: 868px) {
-      align-items: center;
-    }
-
     .badge-tag {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       background: $primary-green-bg;
-      color: $primary-green-dark;
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      margin-bottom: 12px;
+      color: $primary-green;
+      padding: 6px 16px;
+      border-radius: 30px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      border: 1px solid rgba(59, 107, 51, 0.2);
     }
 
     .product-title {
-      font-size: 2.2rem;
+      font-size: 2.35rem;
       font-weight: 800;
-      color: $primary-green;
-      margin-bottom: 16px;
-      line-height: 1.25;
+      color: $text-dark;
+      line-height: 1.3;
+      margin-bottom: 18px;
+      letter-spacing: -0.01em;
 
-      @media (max-width: 600px) {
-        font-size: 1.85rem;
+      .highlight {
+        color: $primary-green;
+      }
+
+      @media (max-width: 768px) {
+        font-size: 1.75rem;
       }
     }
 
     .product-description {
       font-size: 1.08rem;
       color: $text-body;
-      line-height: 1.75;
+      line-height: 1.7;
       margin-bottom: 24px;
-      max-width: 540px;
+    }
+
+    // 4 Key Features Chips Grid
+    .highlight-features-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 28px;
 
       @media (max-width: 600px) {
-        font-size: 1rem;
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .feature-chip {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        background: #fbfdfa;
+        border: 1px solid $border-color;
+        border-radius: 12px;
+        padding: 12px 14px;
+        transition: all $transition-smooth;
+
+        &:hover {
+          background: #ffffff;
+          border-color: $primary-green-light;
+          box-shadow: $shadow-sm;
+          transform: translateY(-2px);
+        }
+
+        .chip-icon {
+          width: 32px;
+          height: 32px;
+          border-radius: 8px;
+          background: $primary-green-bg;
+          color: $primary-green;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+        }
+
+        .chip-content {
+          display: flex;
+          flex-direction: column;
+
+          .chip-title {
+            font-size: 0.95rem;
+            color: $text-dark;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 2px;
+          }
+
+          .chip-desc {
+            font-size: 0.82rem;
+            color: $text-muted;
+            line-height: 1.4;
+          }
+        }
       }
     }
 
-    .price-block {
-      display: flex;
-      align-items: baseline;
-      gap: 16px;
-      margin-bottom: 24px;
+    // Price Card
+    .price-container-card {
+      background: linear-gradient(135deg, #fff9f5 0%, #fff2e8 100%);
+      border: 1.5px dashed rgba(242, 95, 12, 0.4);
+      border-radius: 16px;
+      padding: 16px 22px;
+      margin-bottom: 28px;
+      display: inline-block;
+      width: 100%;
+      max-width: 480px;
 
-      .current-price {
-        font-size: 2.4rem;
-        font-weight: 800;
-        color: $text-dark;
-        font-family: $font-bangla;
+      .price-row-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 6px;
 
-        .currency-symbol {
-          font-size: 1.8rem;
-          margin-left: 2px;
+        .price-label {
+          font-size: 0.95rem;
+          color: #7c441f;
+          font-weight: 600;
+        }
+
+        .discount-tag {
+          background: #ef4444;
+          color: #ffffff;
+          font-size: 0.82rem;
+          font-weight: 700;
+          padding: 3px 10px;
+          border-radius: 20px;
+          box-shadow: 0 2px 6px rgba(239, 68, 68, 0.3);
         }
       }
 
-      .old-price {
-        font-size: 1.4rem;
-        color: #999;
-        text-decoration: line-through;
-        font-weight: 500;
-      }
+      .price-row-main {
+        display: flex;
+        align-items: baseline;
+        gap: 14px;
+        flex-wrap: wrap;
 
-      .discount-tag {
-        background: #fee2e2;
-        color: #dc2626;
-        font-size: 0.85rem;
-        font-weight: 700;
-        padding: 4px 10px;
-        border-radius: 6px;
+        .current-price {
+          font-size: 2.3rem;
+          font-weight: 900;
+          color: $accent-orange;
+          line-height: 1;
+
+          .currency-symbol {
+            font-size: 1.7rem;
+            margin-left: 2px;
+          }
+        }
+
+        .old-price {
+          font-size: 1.25rem;
+          color: #94a3b8;
+          text-decoration: line-through;
+          font-weight: 500;
+        }
+
+        .vat-text {
+          font-size: 0.85rem;
+          color: #64748b;
+          font-weight: 500;
+        }
       }
     }
 
+    // CTA Container
     .cta-container {
-      margin-bottom: 22px;
-      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
     }
 
+    // Social Links
     .social-links {
       display: flex;
       align-items: center;
       gap: 14px;
+      padding-top: 16px;
+      border-top: 1px solid $border-light;
 
       .social-label {
-        font-size: 0.9rem;
+        font-size: 0.92rem;
         color: $text-muted;
-        font-weight: 500;
+        font-weight: 600;
+      }
+
+      .social-btns-wrap {
+        display: flex;
+        align-items: center;
+        gap: 10px;
       }
 
       .social-icon-btn {
-        width: 38px;
-        height: 38px;
+        width: 36px;
+        height: 36px;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        background: #f0f4ef;
-        color: $primary-green;
-        transition: all $transition-smooth;
+        color: #ffffff;
+        text-decoration: none;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
 
-        &.fb:hover {
-          background: #1877f2;
-          color: #fff;
-          transform: translateY(-2px);
+        &:hover {
+          transform: translateY(-2px) scale(1.08);
+          box-shadow: $shadow-sm;
         }
 
-        &.yt:hover {
-          background: #ff0000;
-          color: #fff;
-          transform: translateY(-2px);
-        }
-
-        &.wa:hover {
-          background: #25d366;
-          color: #fff;
-          transform: translateY(-2px);
-        }
+        &.fb { background: #1877f2; }
+        &.yt { background: #ff0000; }
+        &.wa { background: #25d366; }
       }
     }
   }
 
+  // Right Product Jar Column
   .product-image-card {
+    position: relative;
     display: flex;
     justify-content: center;
-    position: relative;
+    align-items: center;
+
+    .image-aura-bg {
+      position: absolute;
+      width: 360px;
+      height: 360px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59, 107, 51, 0.14) 0%, rgba(242, 95, 12, 0.08) 50%, transparent 70%);
+      filter: blur(25px);
+      z-index: 0;
+    }
 
     .image-wrapper {
       position: relative;
-      max-width: 360px;
+      z-index: 1;
       width: 100%;
-      border-radius: 20px;
-      background: radial-gradient(circle, rgba(106, 150, 96, 0.12) 0%, transparent 70%);
-      padding: 20px;
-      transition: transform $transition-bounce;
-
-      &:hover {
-        transform: scale(1.04);
-      }
+      max-width: 380px;
+      animation: floatGentle 5s infinite ease-in-out;
 
       img {
         width: 100%;
         height: auto;
-        filter: drop-shadow(0 18px 30px rgba(0, 0, 0, 0.15));
+        border-radius: 20px;
+        filter: drop-shadow(0 15px 35px rgba(35, 55, 30, 0.18));
       }
 
+      // Floating Pills
       .floating-pill {
         position: absolute;
-        background: #fff;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        border-radius: 14px;
+        padding: 8px 14px;
         box-shadow: $shadow-md;
-        border-radius: 30px;
-        padding: 8px 16px;
         display: flex;
         align-items: center;
-        gap: 8px;
-        font-size: 0.85rem;
-        font-weight: 700;
-        color: $primary-green-dark;
-        border: 1px solid $border-light;
+        gap: 10px;
+        z-index: 2;
+
+        div {
+          display: flex;
+          flex-direction: column;
+          strong {
+            font-size: 0.88rem;
+            color: $text-dark;
+            line-height: 1.2;
+          }
+          span {
+            font-size: 0.74rem;
+            color: $text-muted;
+          }
+        }
+
+        .icon-green { color: $primary-green; }
+        .icon-orange { color: $accent-orange; }
+        .icon-blue { color: #2563eb; }
 
         &.top-right {
-          top: 10px;
-          right: -10px;
-          animation: floatGentle 3s ease-in-out infinite;
+          top: 15px;
+          right: -20px;
+          @media (max-width: 768px) { right: 0; }
         }
 
         &.bottom-left {
-          bottom: 10px;
-          left: -10px;
-          animation: floatGentle 3.5s ease-in-out infinite 0.5s;
+          bottom: 30px;
+          left: -20px;
+          @media (max-width: 768px) { left: 0; }
         }
 
-        @media (max-width: 600px) {
-          display: none;
+        &.bottom-right {
+          bottom: -10px;
+          right: 15px;
+          @media (max-width: 768px) { bottom: 0; }
         }
       }
     }
