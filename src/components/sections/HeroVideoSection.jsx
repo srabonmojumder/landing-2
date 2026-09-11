@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { Play, X, ShieldCheck } from 'lucide-react';
+import { Play, X, ShieldCheck, Sparkles, Truck, Star, ArrowRight } from 'lucide-react';
 
 export default function HeroVideoSection() {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
@@ -20,20 +20,55 @@ export default function HeroVideoSection() {
       <section className="hero-video-section">
         <div className="container">
           <div className="hero-content">
+            {/* Top Quality Badge */}
+            <div className="hero-badge">
+              <Sparkles size={16} className="sparkle-anim" />
+              <span>১০০% প্রাকৃতিক ও প্রিমিয়াম প্রোটিন ফর্মুলা</span>
+            </div>
+
+            {/* Main Headline */}
             <h1 className="hero-title">
-              প্রোটিন সমৃদ্ধ সুপার ফুড SMD হেলদি মিক্স
+              প্রোটিন সমৃদ্ধ সুপার ফুড <span className="highlight-text">SMD হেলদি মিক্স</span>
             </h1>
 
+            {/* Sub-headline */}
+            <p className="hero-subtitle">
+              ২০টি প্রিমিয়াম উপাদান ও বাদামের অনন্য মিশ্রণ — শরীরের শক্তি, রোগ প্রতিরোধ ক্ষমতা ও দৈনন্দিন কর্মক্ষমতা বাড়ানোর প্রাকৃতিক সমাধান!
+            </p>
+
+            {/* Main CTA */}
             <div className="cta-wrapper">
               <a
                 href="#order-form"
                 onClick={scrollToOrder}
                 className="btn-cta-orange pulsing"
               >
-                অগ্রিম পেমেন্ট ছাড়াই অর্ডার করুন
+                <span>অগ্রিম পেমেন্ট ছাড়াই অর্ডার করুন</span>
+                <ArrowRight size={20} className="arrow-icon" />
               </a>
             </div>
 
+            {/* Trust Highlights under CTA */}
+            <div className="hero-trust-row">
+              <div className="trust-pill">
+                <Truck size={15} />
+                <span>সারাদেশে ক্যাশ অন ডেলিভারি</span>
+              </div>
+              <div className="trust-pill">
+                <ShieldCheck size={15} />
+                <span>১০০% খাঁটি ও নির্ভেজাল</span>
+              </div>
+              <div className="trust-pill stars-pill">
+                <div className="stars-mini">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} size={13} fill="#fbbf24" color="#fbbf24" />
+                  ))}
+                </div>
+                <span>৪.৯/৫ (৩,৫০০+ রিভিউ)</span>
+              </div>
+            </div>
+
+            {/* Video Showcase Card */}
             <div className="video-card-container">
               <div
                 className="video-thumbnail-wrapper"
@@ -43,8 +78,8 @@ export default function HeroVideoSection() {
                 <Image
                   src="/images/video-presenter.jpg"
                   alt="SMD Healthy Mix Presentation Video"
-                  width={760}
-                  height={428}
+                  width={820}
+                  height={460}
                   priority
                 />
 
@@ -54,25 +89,27 @@ export default function HeroVideoSection() {
                     <ShieldCheck size={16} />
                     <span>SMD HEALTHY MIX</span>
                   </div>
-                  <span>SMD Healthy Mix Official Video</span>
+                  <span className="live-tag">
+                    <span className="live-dot"></span> অফিশিয়াল ভিডিও
+                  </span>
                 </div>
 
                 {/* Center Play Pulse */}
-                <div className="play-btn-pulse">
-                  <Play size={32} fill="#ffffff" />
+                <div className="play-btn-pulse" aria-label="Play video">
+                  <Play size={34} fill="#ffffff" />
                 </div>
 
                 {/* Bottom Bar Info */}
                 <div className="video-bottom-bar">
-                  <span>▶ Watch Video (2:45 min)</span>
-                  <span>100% Organic & Halal</span>
+                  <span className="video-time">▶ ভিডিওটি দেখুন (২:৪৫ মিনিট)</span>
+                  <span className="video-tag">১০০% অর্গানিক পুষ্টি</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Bottom Shape Divider */}
+        {/* Bottom Shape Divider (Elementor Drips/Torn SVG) */}
         <div className="hero-shape-divider hero-shape-bottom" aria-hidden="true">
           <svg
             xmlns="http://www.w3.org/2000/svg"

@@ -1,13 +1,13 @@
 @use "../abstracts/tokens" as *;
 
 .hero-video-section {
-  background: linear-gradient(180deg, #466e3e 0%, #3e6137 60%, #35532f 100%);
+  background: linear-gradient(180deg, #345c2c 0%, #2b4c24 55%, #223c1d 100%);
   color: $text-light;
-  padding: 42px 0 60px 0;
+  padding: 40px 0 75px 0;
   position: relative;
   overflow: hidden;
 
-  // Background subtle leaf/organic pattern
+  // Background subtle organic pattern & ambient lights
   &::before {
     content: '';
     position: absolute;
@@ -15,8 +15,8 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.05) 0%, transparent 40%);
+    background: radial-gradient(circle at 15% 25%, rgba(255, 255, 255, 0.12) 0%, transparent 45%),
+                radial-gradient(circle at 85% 75%, rgba(255, 255, 255, 0.08) 0%, transparent 45%);
     pointer-events: none;
   }
 
@@ -29,44 +29,145 @@
     z-index: 2;
   }
 
-  .hero-title {
-    font-size: 2.3rem;
-    font-weight: 800;
-    color: $text-light;
-    margin-bottom: 24px;
-    letter-spacing: -0.01em;
-    max-width: 800px;
-    line-height: 1.35;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  // Top Pill Badge
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.16);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    padding: 6px 18px;
+    border-radius: 30px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 
-    @media (max-width: 768px) {
-      font-size: 1.65rem;
-      margin-bottom: 20px;
+    .sparkle-anim {
+      color: #ffd166;
+      animation: pulseGlow 2s infinite ease-in-out;
     }
   }
 
+  // Main Headline
+  .hero-title {
+    font-size: 2.65rem;
+    font-weight: 800;
+    color: $text-light;
+    margin-bottom: 16px;
+    letter-spacing: -0.015em;
+    max-width: 860px;
+    line-height: 1.32;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+
+    .highlight-text {
+      color: #ffd166;
+      display: inline-block;
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: $accent-orange;
+        border-radius: 2px;
+        opacity: 0.85;
+      }
+    }
+
+    @media (max-width: 768px) {
+      font-size: 1.85rem;
+      margin-bottom: 14px;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 1.6rem;
+    }
+  }
+
+  // Subtitle
+  .hero-subtitle {
+    font-size: 1.15rem;
+    color: #e2ede0;
+    max-width: 760px;
+    line-height: 1.6;
+    margin-bottom: 28px;
+    font-weight: 400;
+
+    @media (max-width: 768px) {
+      font-size: 0.98rem;
+      margin-bottom: 22px;
+    }
+  }
+
+  // CTA Wrapper
   .cta-wrapper {
-    margin-bottom: 36px;
+    margin-bottom: 20px;
     width: 100%;
     display: flex;
     justify-content: center;
   }
 
+  // Trust Pills under CTA
+  .hero-trust-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 36px;
+
+    .trust-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(4px);
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      color: #f0f7ef;
+
+      &.stars-pill {
+        .stars-mini {
+          display: flex;
+          align-items: center;
+          gap: 2px;
+        }
+      }
+    }
+
+    @media (max-width: 600px) {
+      gap: 8px;
+      .trust-pill {
+        font-size: 0.78rem;
+        padding: 4px 10px;
+      }
+    }
+  }
+
+  // Video Card Container
   .video-card-container {
     width: 100%;
-    max-width: 760px;
+    max-width: 780px;
     margin: 0 auto;
-    border-radius: 18px;
+    border-radius: 20px;
     overflow: hidden;
     background: #000;
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
-    border: 3px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+    border: 3px solid rgba(255, 255, 255, 0.25);
     position: relative;
     transition: transform $transition-smooth, box-shadow $transition-smooth;
 
     &:hover {
       transform: translateY(-4px);
-      box-shadow: 0 22px 50px rgba(0, 0, 0, 0.55);
+      box-shadow: 0 26px 65px rgba(0, 0, 0, 0.6);
+      border-color: rgba(255, 255, 255, 0.4);
     }
   }
 
@@ -84,7 +185,7 @@
     }
 
     &:hover img {
-      transform: scale(1.03);
+      transform: scale(1.025);
     }
 
     .video-overlay-bar {
@@ -96,7 +197,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: linear-gradient(180deg, rgba(0,0,0,0.75) 0%, transparent 100%);
+      background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, transparent 100%);
       color: #fff;
       font-size: 0.95rem;
       font-weight: 600;
@@ -105,37 +206,65 @@
         display: flex;
         align-items: center;
         gap: 6px;
-        background: rgba(255, 255, 255, 0.2);
-        backdrop-filter: blur(4px);
+        background: rgba(255, 255, 255, 0.22);
+        backdrop-filter: blur(6px);
         padding: 4px 12px;
         border-radius: 20px;
         font-size: 0.85rem;
       }
+
+      .live-tag {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.85rem;
+        background: rgba(0, 0, 0, 0.4);
+        padding: 3px 10px;
+        border-radius: 12px;
+
+        .live-dot {
+          width: 8px;
+          height: 8px;
+          background: #ef4444;
+          border-radius: 50%;
+          animation: pulseGlow 1.5s infinite;
+        }
+      }
     }
 
+    // Play Button with concentric wave ripple
     .play-btn-pulse {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 76px;
-      height: 76px;
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
-      background: #ff0000;
+      background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%);
       display: flex;
       align-items: center;
       justify-content: center;
       color: #fff;
       box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7);
       animation: playPulse 2s infinite;
-      transition: transform 0.2s ease;
+      transition: transform 0.25s ease;
 
       svg {
-        margin-left: 4px;
+        margin-left: 5px;
       }
 
       &:hover {
         transform: translate(-50%, -50%) scale(1.12);
+      }
+
+      @media (max-width: 600px) {
+        width: 62px;
+        height: 62px;
+        svg {
+          width: 26px;
+          height: 26px;
+        }
       }
     }
 
@@ -144,13 +273,13 @@
       bottom: 0;
       left: 0;
       right: 0;
-      padding: 10px 18px;
-      background: linear-gradient(0deg, rgba(0,0,0,0.85) 0%, transparent 100%);
+      padding: 12px 18px;
+      background: linear-gradient(0deg, rgba(0,0,0,0.88) 0%, transparent 100%);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      color: #ddd;
-      font-size: 0.85rem;
+      color: #eaeaea;
+      font-size: 0.88rem;
     }
   }
 
@@ -161,8 +290,8 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(8px);
+    background: rgba(0, 0, 0, 0.88);
+    backdrop-filter: blur(10px);
     z-index: 1000;
     display: flex;
     align-items: center;
@@ -172,12 +301,13 @@
 
   .video-modal-inner {
     width: 100%;
-    max-width: 860px;
+    max-width: 880px;
     background: #111;
-    border-radius: 16px;
+    border-radius: 18px;
     overflow: hidden;
     position: relative;
-    box-shadow: 0 25px 60px rgba(0,0,0,0.8);
+    box-shadow: 0 25px 70px rgba(0,0,0,0.9);
+    border: 1px solid rgba(255, 255, 255, 0.15);
 
     .close-btn {
       position: absolute;
@@ -185,17 +315,20 @@
       right: 14px;
       background: rgba(255, 255, 255, 0.2);
       color: #fff;
-      width: 36px;
-      height: 36px;
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       z-index: 10;
-      transition: background 0.2s ease;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
 
       &:hover {
-        background: #ea5f0c;
+        background: $accent-orange;
+        transform: rotate(90deg);
       }
     }
 
@@ -217,6 +350,7 @@
   }
 }
 
+// Elementor Shape Divider at Bottom
 .hero-shape-divider {
   position: absolute;
   bottom: -1px;
@@ -224,6 +358,7 @@
   width: 100%;
   overflow: hidden;
   line-height: 0;
+  direction: ltr;
   z-index: 3;
   pointer-events: none;
   transform: rotate(180deg);
@@ -231,13 +366,13 @@
   svg {
     display: block;
     width: calc(100% + 1.3px);
-    height: 42px;
+    height: 44px;
     position: relative;
     left: 50%;
     transform: translateX(-50%);
 
     @media (max-width: 768px) {
-      height: 24px;
+      height: 26px;
     }
   }
 
@@ -251,7 +386,7 @@
     box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7);
   }
   70% {
-    box-shadow: 0 0 0 20px rgba(255, 0, 0, 0);
+    box-shadow: 0 0 0 22px rgba(255, 0, 0, 0);
   }
   100% {
     box-shadow: 0 0 0 0 rgba(255, 0, 0, 0);
