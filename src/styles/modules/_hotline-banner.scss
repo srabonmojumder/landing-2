@@ -1,70 +1,148 @@
 @use "../abstracts/tokens" as *;
 
 .hotline-banner-section {
-  padding: 10px 0 45px 0;
-  background: $bg-white;
+  padding: 30px 0 60px 0;
+  background-color: #ffffff;
 
   .hotline-card {
-    background: linear-gradient(135deg, #4f7447 0%, #35532f 100%);
-    border-radius: 16px;
-    padding: 30px 24px;
-    text-align: center;
-    color: #ffffff;
-    box-shadow: $shadow-green;
-    position: relative;
-    overflow: hidden;
+    background: linear-gradient(135deg, #fff8f3 0%, #ffeedf 100%);
+    border: 2px dashed rgba(242, 95, 12, 0.4);
+    border-radius: 24px;
+    padding: 36px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    box-shadow: $shadow-sm;
 
-    .hotline-heading {
-      font-size: 1.8rem;
-      font-weight: 800;
-      color: #ffffff;
-      margin-bottom: 20px;
+    @media (max-width: 992px) {
+      flex-direction: column;
+      text-align: center;
+      padding: 32px 20px;
+    }
 
-      @media (max-width: 600px) {
-        font-size: 1.5rem;
+    .hotline-left {
+      max-width: 580px;
+
+      .hotline-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(242, 95, 12, 0.12);
+        color: $accent-orange-dark;
+        padding: 4px 14px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        margin-bottom: 12px;
+      }
+
+      .hotline-heading {
+        font-size: 1.65rem;
+        font-weight: 800;
+        color: $text-dark;
+        margin-bottom: 8px;
+        line-height: 1.35;
+
+        @media (max-width: 768px) {
+          font-size: 1.35rem;
+        }
+      }
+
+      .hotline-subtext {
+        font-size: 0.95rem;
+        color: $text-muted;
+        line-height: 1.55;
       }
     }
 
-    .phone-btn-wrap {
-      display: inline-flex;
-      justify-content: center;
-    }
-
-    .phone-action-btn {
-      display: inline-flex;
+    .hotline-actions {
+      display: flex;
       align-items: center;
-      gap: 12px;
-      background: linear-gradient(135deg, #f97316 0%, #ea5f0c 100%);
-      color: #ffffff;
-      font-size: 1.45rem;
-      font-weight: 800;
-      padding: 14px 38px;
-      border-radius: 50px;
-      box-shadow: $shadow-orange;
-      letter-spacing: 0.5px;
-      font-family: $font-sans;
-      transition: all $transition-bounce;
+      gap: 16px;
+      flex-wrap: wrap;
 
-      &:hover {
-        transform: scale(1.05);
-        background: linear-gradient(135deg, #fb923c 0%, #f97316 100%);
-        box-shadow: 0 12px 30px rgba(234, 95, 12, 0.5);
+      @media (max-width: 992px) {
+        justify-content: center;
       }
 
-      .phone-icon-pulse {
-        animation: pulse 1.5s infinite;
+      .phone-action-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        background: $accent-orange-gradient;
+        color: #ffffff;
+        padding: 14px 28px;
+        border-radius: 50px;
+        text-decoration: none;
+        box-shadow: $shadow-orange;
+        transition: all $transition-smooth;
+
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 12px 30px rgba(242, 95, 12, 0.55);
+        }
+
+        .phone-icon-pulse {
+          animation: pulseGlow 1.8s infinite;
+        }
+
+        .btn-text {
+          display: flex;
+          flex-direction: column;
+          text-align: left;
+
+          .small-label {
+            font-size: 0.76rem;
+            color: #ffd8bf;
+            line-height: 1.1;
+          }
+
+          .number {
+            font-size: 1.15rem;
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: 0.02em;
+          }
+        }
       }
 
-      @media (max-width: 600px) {
-        font-size: 1.2rem;
-        padding: 12px 28px;
-      }
-    }
+      .whatsapp-action-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        background: #25d366;
+        color: #ffffff;
+        padding: 14px 28px;
+        border-radius: 50px;
+        text-decoration: none;
+        box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35);
+        transition: all $transition-smooth;
 
-    .hotline-subtext {
-      margin-top: 14px;
-      font-size: 0.95rem;
-      color: rgba(255, 255, 255, 0.85);
+        &:hover {
+          background: #20ba5a;
+          transform: translateY(-2px);
+          box-shadow: 0 10px 28px rgba(37, 211, 102, 0.5);
+        }
+
+        .btn-text {
+          display: flex;
+          flex-direction: column;
+          text-align: left;
+
+          .small-label {
+            font-size: 0.76rem;
+            color: #d1fae5;
+            line-height: 1.1;
+          }
+
+          .number {
+            font-size: 1.15rem;
+            font-weight: 800;
+            line-height: 1.2;
+          }
+        }
+      }
     }
   }
 }

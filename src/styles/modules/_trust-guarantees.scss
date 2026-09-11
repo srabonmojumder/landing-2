@@ -1,90 +1,139 @@
 @use "../abstracts/tokens" as *;
 
 .trust-guarantees-section {
-  padding: 20px 0 35px 0;
-  background: $bg-white;
+  padding: 40px 0 70px 0;
+  background-color: #ffffff;
 
   .trust-banner-card {
-    background: linear-gradient(135deg, #4f7447 0%, #3e6137 100%);
-    border-radius: 16px;
-    padding: 34px 28px;
+    background: linear-gradient(135deg, #274b20 0%, #36652d 50%, #1e3a19 100%);
     color: #ffffff;
-    box-shadow: $shadow-green;
+    border-radius: 28px;
+    padding: 50px 40px;
+    text-align: center;
+    box-shadow: $shadow-lg;
     position: relative;
     overflow: hidden;
+
+    @media (max-width: 768px) {
+      padding: 36px 20px;
+      border-radius: 20px;
+    }
 
     &::before {
       content: '';
       position: absolute;
-      top: -50px;
-      right: -50px;
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.08);
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.12) 0%, transparent 40%),
+                  radial-gradient(circle at 90% 80%, rgba(255, 255, 255, 0.08) 0%, transparent 40%);
       pointer-events: none;
     }
 
+    .banner-top-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(6px);
+      padding: 6px 18px;
+      border-radius: 30px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
     .banner-title {
-      text-align: center;
-      font-size: 2rem;
+      font-size: 2.3rem;
       font-weight: 800;
       color: #ffffff;
-      margin-bottom: 26px;
-      letter-spacing: -0.01em;
+      margin-bottom: 10px;
+      line-height: 1.3;
 
-      @media (max-width: 600px) {
-        font-size: 1.6rem;
+      @media (max-width: 768px) {
+        font-size: 1.7rem;
       }
     }
 
-    .guarantee-points {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      max-width: 720px;
-      margin: 0 auto;
+    .banner-subtitle {
+      font-size: 1.05rem;
+      color: #dcead9;
+      max-width: 600px;
+      margin: 0 auto 40px auto;
+      line-height: 1.6;
+    }
 
-      .point-item {
-        display: flex;
-        align-items: center;
-        gap: 14px;
+    .guarantee-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      position: relative;
+      z-index: 2;
+
+      @media (max-width: 992px) {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
+      .guarantee-card {
         background: rgba(255, 255, 255, 0.12);
-        backdrop-filter: blur(4px);
-        padding: 12px 20px;
-        border-radius: 12px;
-        border: 1px solid rgba(255, 255, 255, 0.18);
-        transition: transform $transition-fast;
+        backdrop-filter: blur(10px);
+        border: 1.5px solid rgba(255, 255, 255, 0.2);
+        border-radius: 20px;
+        padding: 28px 22px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        transition: all $transition-smooth;
 
         &:hover {
-          transform: translateX(4px);
           background: rgba(255, 255, 255, 0.18);
+          border-color: rgba(255, 255, 255, 0.4);
+          transform: translateY(-4px);
         }
 
-        .point-icon {
-          color: #facc15;
-          min-width: 24px;
-          height: 24px;
+        .icon-wrapper {
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+          background: #ffffff;
+          color: $primary-green;
           display: flex;
           align-items: center;
           justify-content: center;
-          flex-shrink: 0;
-
-          svg {
-            width: 20px;
-            height: 20px;
-          }
+          margin-bottom: 16px;
+          box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
         }
 
-        .point-text {
-          font-size: 1.15rem;
-          font-weight: 600;
+        .guarantee-heading {
+          font-size: 1.22rem;
+          font-weight: 800;
           color: #ffffff;
-          line-height: 1.4;
+          margin-bottom: 10px;
+          line-height: 1.35;
+        }
 
-          @media (max-width: 600px) {
-            font-size: 1rem;
-          }
+        .guarantee-text {
+          font-size: 0.9rem;
+          color: #e5f2e3;
+          line-height: 1.55;
+          margin-bottom: 18px;
+          flex-grow: 1;
+        }
+
+        .guarantee-check {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          background: rgba(255, 255, 255, 0.2);
+          padding: 4px 12px;
+          border-radius: 12px;
+          font-size: 0.8rem;
+          font-weight: 600;
+          color: #ffd166;
         }
       }
     }
