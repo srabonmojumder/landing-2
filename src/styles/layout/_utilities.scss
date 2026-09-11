@@ -1,24 +1,32 @@
 @use "../abstracts/tokens" as *;
 
-// Main CTA Pulse Button
+// Main CTA Radiant Button
 .btn-cta-orange {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  background: linear-gradient(135deg, $accent-orange-light 0%, $accent-orange 60%, $accent-orange-dark 100%);
+  gap: 12px;
+  background: $accent-orange-gradient;
   color: $text-light;
   font-family: $font-bangla;
-  font-size: 1.15rem;
+  font-size: 1.22rem;
   font-weight: 700;
-  padding: 14px 34px;
+  padding: 16px 38px;
   border-radius: 50px;
   box-shadow: $shadow-orange;
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  text-decoration: none;
+  border: none;
+  outline: none;
   transition: all $transition-bounce;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  letter-spacing: -0.01em;
+
+  .arrow-icon {
+    transition: transform 0.25s ease;
+  }
 
   &::before {
     content: '';
@@ -27,14 +35,18 @@
     left: -100%;
     width: 60%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
     transform: skewX(-25deg);
-    animation: sweepShine 3.5s infinite;
+    animation: sweepShine 3s infinite;
   }
 
   &:hover {
     transform: translateY(-3px) scale(1.03);
-    box-shadow: 0 12px 30px rgba(234, 95, 12, 0.5);
+    box-shadow: 0 16px 36px rgba(242, 95, 12, 0.55);
+
+    .arrow-icon {
+      transform: translateX(4px);
+    }
   }
 
   &:active {
@@ -42,91 +54,135 @@
   }
 
   &.pulsing {
-    animation: ctaPulse 2s infinite ease-in-out;
+    animation: ctaPulse 2.2s infinite ease-in-out;
   }
 
   @media (max-width: 600px) {
-    font-size: 1rem;
-    padding: 12px 24px;
+    font-size: 1.05rem;
+    padding: 14px 26px;
     width: 100%;
-    max-width: 340px;
+    max-width: 360px;
   }
 }
 
-// Section Badges
-.section-badge-green {
-  display: inline-block;
-  background: $primary-green;
-  color: $text-light;
-  padding: 8px 26px;
-  border-radius: 6px;
-  font-size: 1.35rem;
+// WhatsApp Outline Button
+.btn-whatsapp-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #25d366;
+  color: #ffffff;
+  font-family: $font-bangla;
+  font-size: 1.05rem;
+  font-weight: 600;
+  padding: 14px 28px;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all $transition-smooth;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+
+  &:hover {
+    background: #20ba5a;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(37, 211, 102, 0.45);
+  }
+
+  @media (max-width: 600px) {
+    width: 100%;
+    max-width: 360px;
+  }
+}
+
+// Top Notice Urgent Bar
+.top-notice-bar {
+  background: linear-gradient(90deg, #1b3517 0%, #2b5523 50%, #1b3517 100%);
+  color: #ffffff;
+  padding: 8px 0;
+  font-size: 0.88rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+
+  .notice-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    flex-wrap: wrap;
+
+    @media (max-width: 768px) {
+      justify-content: center;
+      text-align: center;
+    }
+  }
+
+  .notice-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    strong {
+      color: #ffd166;
+    }
+  }
+
+  .notice-badges {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+
+    .badge-pill {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(255, 255, 255, 0.12);
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+    }
+
+    .hotline-link {
+      background: $accent-orange;
+      color: #ffffff;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s ease;
+
+      &:hover {
+        background: $accent-orange-light;
+      }
+    }
+  }
+}
+
+// Section Badges & Labels
+.badge-tag-center {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: $primary-green-bg;
+  color: $primary-green-dark;
+  border: 1px solid rgba(59, 107, 51, 0.2);
+  padding: 6px 18px;
+  border-radius: 30px;
+  font-size: 0.95rem;
   font-weight: 700;
-  box-shadow: $shadow-sm;
-  position: relative;
-
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -8px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-top: 8px solid $primary-green;
-  }
-}
-
-.section-badge-orange {
-  display: inline-block;
-  background: $accent-orange;
-  color: $text-light;
-  padding: 8px 26px;
-  border-radius: 6px;
-  font-size: 1.35rem;
-  font-weight: 700;
-  box-shadow: $shadow-sm;
-}
-
-// Organic Divider Shapes
-.wave-divider-top {
-  width: 100%;
-  overflow: hidden;
-  line-height: 0;
-  transform: rotate(180deg);
-
-  svg {
-    position: relative;
-    display: block;
-    width: calc(100% + 1.3px);
-    height: 48px;
-  }
-}
-
-.wave-divider-bottom {
-  width: 100%;
-  overflow: hidden;
-  line-height: 0;
-
-  svg {
-    position: relative;
-    display: block;
-    width: calc(100% + 1.3px);
-    height: 48px;
-  }
+  margin-bottom: 14px;
 }
 
 // Animations
 @keyframes ctaPulse {
   0%, 100% {
     transform: scale(1);
-    box-shadow: 0 6px 20px rgba(234, 95, 12, 0.4);
+    box-shadow: 0 8px 24px rgba(242, 95, 12, 0.4);
   }
   50% {
-    transform: scale(1.04);
-    box-shadow: 0 10px 28px rgba(234, 95, 12, 0.65);
+    transform: scale(1.035);
+    box-shadow: 0 14px 34px rgba(242, 95, 12, 0.65);
   }
 }
 
@@ -138,10 +194,10 @@
 
 @keyframes floatGentle {
   0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
+  50% { transform: translateY(-7px); }
 }
 
-@keyframes spinSlow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.8; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.08); }
 }

@@ -1,45 +1,51 @@
-// Theme Colors (Matching the Organic Green & Warm Orange Landing Palette)
-$primary-green: #4f7447;
-$primary-green-dark: #375331;
-$primary-green-light: #6a9660;
-$primary-green-bg: #eaf1e8;
-$primary-green-soft: #f4f8f3;
+// Theme Colors (Modern Rich Organic Emerald & High-Converting Radiant Orange)
+$primary-green: #3b6b33;
+$primary-green-dark: #274b21;
+$primary-green-deep: #1b3816;
+$primary-green-light: #528c46;
+$primary-green-bg: #f0f6ef;
+$primary-green-soft: #f8faf7;
 
-$accent-orange: #ea5f0c;
-$accent-orange-dark: #cc4e04;
-$accent-orange-light: #ff7728;
-$accent-orange-bg: #fff4ec;
+$accent-orange: #f25f0c;
+$accent-orange-dark: #cc4900;
+$accent-orange-light: #ff7824;
+$accent-orange-gradient: linear-gradient(135deg, #ff7e29 0%, #f25f0c 50%, #d64800 100%);
+$accent-orange-bg: #fff5ee;
 
-$accent-gold: #d99814;
+$accent-gold: #f59e0b;
 $accent-gold-light: #fef3c7;
 
-// Neutrals
+// Neutrals & Surfaces
 $bg-white: #ffffff;
 $bg-light: #f9fbf8;
 $bg-cream: #faf7f2;
-$bg-dark: #1e281b;
+$bg-card: rgba(255, 255, 255, 0.96);
+$bg-dark: #121c10;
 
-$text-dark: #1d261c;
-$text-body: #334031;
-$text-muted: #647562;
+$text-dark: #142011;
+$text-heading: #1e2e1b;
+$text-body: #32432e;
+$text-muted: #62755e;
 $text-light: #ffffff;
 
-$border-color: #e2ebe0;
-$border-light: #eef3ec;
-$border-accent: rgba(234, 95, 12, 0.25);
+$border-color: #e2ede0;
+$border-light: #edf4eb;
+$border-accent: rgba(242, 95, 12, 0.25);
+$border-green: rgba(59, 107, 51, 0.2);
 
 // Elevation Shadows
-$shadow-xs: 0 2px 8px rgba(35, 55, 30, 0.06);
-$shadow-sm: 0 4px 16px rgba(35, 55, 30, 0.08);
-$shadow-md: 0 10px 30px rgba(35, 55, 30, 0.12);
-$shadow-lg: 0 18px 45px rgba(35, 55, 30, 0.18);
-$shadow-orange: 0 8px 25px rgba(234, 95, 12, 0.35);
-$shadow-green: 0 8px 25px rgba(79, 116, 71, 0.35);
+$shadow-xs: 0 2px 8px rgba(25, 45, 20, 0.05);
+$shadow-sm: 0 4px 16px rgba(25, 45, 20, 0.08);
+$shadow-md: 0 10px 30px rgba(25, 45, 20, 0.12);
+$shadow-lg: 0 18px 45px rgba(25, 45, 20, 0.16);
+$shadow-xl: 0 25px 60px rgba(25, 45, 20, 0.22);
+$shadow-orange: 0 10px 32px rgba(242, 95, 12, 0.42);
+$shadow-green: 0 10px 30px rgba(59, 107, 51, 0.35);
 
 // Typography
 $font-sans: 'Plus Jakarta Sans', 'Outfit', 'Inter', sans-serif;
-$font-heading: 'Outfit', 'Plus Jakarta Sans', sans-serif;
-$font-bangla: 'Hind Siliguri', 'Noto Sans Bengali', 'Anek Bangla', 'Plus Jakarta Sans', sans-serif;
+$font-heading: 'Hind Siliguri', 'Noto Sans Bengali', 'Outfit', sans-serif;
+$font-bangla: 'Hind Siliguri', 'Noto Sans Bengali', 'Anek Bangla', sans-serif;
 
 // Transitions
 $transition-fast: 0.2s ease;
