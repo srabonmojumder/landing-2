@@ -1,175 +1,269 @@
 @use "../abstracts/tokens" as *;
 
 .benefits-section {
-  padding: 50px 0 60px 0;
-  background: linear-gradient(180deg, #f8faf7 0%, #edf3eb 100%);
+  padding: 80px 0;
+  background: linear-gradient(180deg, #f7faf6 0%, #edf5eb 100%);
   position: relative;
 
   .section-header {
     text-align: center;
-    margin-bottom: 40px;
-
-    .section-title-wrap {
-      display: inline-block;
-      position: relative;
-    }
+    max-width: 800px;
+    margin: 0 auto 50px auto;
 
     .main-badge {
-      background: $primary-green;
-      color: #fff;
-      font-size: 1.6rem;
-      font-weight: 800;
-      padding: 10px 36px;
-      border-radius: 8px;
-      box-shadow: $shadow-green;
       display: inline-block;
+      background: $primary-green;
+      color: #ffffff;
+      padding: 6px 22px;
+      border-radius: 30px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      box-shadow: 0 4px 12px rgba(59, 107, 51, 0.25);
+    }
+
+    .section-heading {
+      font-size: 2.35rem;
+      font-weight: 800;
+      color: $text-dark;
+      line-height: 1.35;
+      margin-bottom: 12px;
+
+      .highlight-green {
+        color: $primary-green;
+      }
+
+      @media (max-width: 768px) {
+        font-size: 1.75rem;
+      }
     }
 
     .subtext {
-      margin-top: 10px;
       font-size: 1.05rem;
       color: $text-muted;
+      line-height: 1.6;
     }
   }
 
+  // 2 Column Grid
   .benefits-grid {
     display: grid;
-    grid-template-columns: 1.05fr 0.95fr;
-    gap: 36px;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 40px;
     align-items: center;
 
-    @media (max-width: 920px) {
+    @media (max-width: 992px) {
       grid-template-columns: 1fr;
+      gap: 50px;
     }
   }
 
-  .benefits-checklist {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
+  // Left Checklist Cards
+  .benefits-cards-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
 
-    .benefit-item {
+    @media (max-width: 600px) {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .benefit-card-item {
+      background: #ffffff;
+      border: 1px solid $border-color;
+      border-radius: 16px;
+      padding: 16px 18px;
       display: flex;
       align-items: flex-start;
       gap: 14px;
-      background: #ffffff;
-      padding: 14px 18px;
-      border-radius: 12px;
       box-shadow: $shadow-xs;
-      border: 1px solid rgba(79, 116, 71, 0.12);
       transition: all $transition-smooth;
 
       &:hover {
-        transform: translateX(6px);
-        box-shadow: $shadow-sm;
         border-color: $primary-green;
-      }
+        box-shadow: $shadow-md;
+        transform: translateY(-3px);
 
-      .icon-bullet {
-        color: $primary-green;
-        background: $primary-green-bg;
-        min-width: 28px;
-        height: 28px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-top: 2px;
-        flex-shrink: 0;
-
-        svg {
-          width: 16px;
-          height: 16px;
+        .card-icon-box {
+          background: $primary-green;
+          color: #ffffff;
+          transform: scale(1.08);
         }
       }
 
-      .item-text {
-        font-size: 1.12rem;
-        font-weight: 600;
-        color: $text-dark;
-        line-height: 1.5;
+      .card-icon-box {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        background: $primary-green-bg;
+        color: $primary-green;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        transition: all $transition-smooth;
+      }
+
+      .card-info {
+        .benefit-item-title {
+          font-size: 1rem;
+          font-weight: 700;
+          color: $text-dark;
+          margin-bottom: 4px;
+          line-height: 1.35;
+        }
+
+        .benefit-item-desc {
+          font-size: 0.84rem;
+          color: $text-muted;
+          line-height: 1.45;
+        }
       }
     }
   }
 
-  // Ingredients Wheel / Graphic
+  // Right Ingredients Wheel Card
   .ingredients-wheel-card {
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 28px 24px;
+    box-shadow: $shadow-md;
+    border: 1px solid $border-color;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    text-align: center;
     position: relative;
+
+    .wheel-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: $text-dark;
+      margin-bottom: 18px;
+
+      .icon-sparkle {
+        color: $accent-orange;
+      }
+    }
 
     .wheel-container {
       position: relative;
-      width: 340px;
-      height: 340px;
-      margin: 0 auto;
+      width: 280px;
+      height: 280px;
+      margin: 0 auto 20px auto;
 
       @media (max-width: 480px) {
-        width: 290px;
-        height: 290px;
-      }
-    }
-
-    .pie-svg-chart {
-      width: 100%;
-      height: 100%;
-      filter: drop-shadow(0 12px 24px rgba(35, 55, 30, 0.15));
-    }
-
-    .wheel-center-badge {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 110px;
-      height: 110px;
-      border-radius: 50%;
-      background: $primary-green;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.25);
-      border: 4px solid #fff;
-      padding: 6px;
-      z-index: 5;
-
-      .brand-title {
-        font-size: 1.05rem;
-        font-weight: 800;
-        line-height: 1.2;
+        width: 250px;
+        height: 250px;
       }
 
-      .sub {
-        font-size: 0.72rem;
-        color: #d1e7cb;
-        margin-top: 2px;
+      .pie-svg-chart {
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+
+        .slice-group {
+          transition: transform 0.25s ease;
+
+          &:hover {
+            transform: scale(1.04);
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+          }
+        }
+      }
+
+      .wheel-center-badge {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 106px;
+        height: 106px;
+        border-radius: 50%;
+        background: #ffffff;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.16);
+        border: 4px solid #f0f6ef;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+
+        .brand-badge-top {
+          font-size: 0.85rem;
+          font-weight: 800;
+          color: $primary-green;
+          line-height: 1;
+        }
+
+        .brand-title {
+          font-size: 0.92rem;
+          font-weight: 800;
+          color: $text-dark;
+          line-height: 1.2;
+        }
+
+        .sub {
+          font-size: 0.68rem;
+          color: $accent-orange;
+          font-weight: 700;
+          margin-top: 2px;
+        }
       }
     }
 
     .ingredient-tooltip {
-      margin-top: 18px;
-      background: #ffffff;
-      padding: 8px 18px;
-      border-radius: 20px;
-      box-shadow: $shadow-xs;
-      font-size: 0.92rem;
-      font-weight: 600;
-      color: $primary-green-dark;
-      border: 1px solid $border-color;
       display: flex;
       align-items: center;
-      gap: 6px;
+      justify-content: center;
+      gap: 8px;
+      background: #fff6ee;
+      border: 1px solid rgba(242, 95, 12, 0.25);
+      border-radius: 20px;
+      padding: 8px 16px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #92400e;
+      min-height: 40px;
+      width: 100%;
+      margin-bottom: 16px;
+    }
+
+    .wheel-tags-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+
+      .wheel-tag {
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: $primary-green-dark;
+        background: $primary-green-bg;
+        padding: 4px 10px;
+        border-radius: 12px;
+      }
     }
   }
 
+  // Bottom CTA
   .cta-bottom-wrap {
-    margin-top: 40px;
+    margin-top: 50px;
+    text-align: center;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+
+    .cta-guarantee-note {
+      font-size: 0.95rem;
+      color: $text-muted;
+      font-weight: 600;
+    }
   }
 }
