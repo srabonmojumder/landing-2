@@ -1,13 +1,12 @@
 @use "../abstracts/tokens" as *;
 
 .preparation-section {
-  background: linear-gradient(135deg, #d86411 0%, #eb711c 50%, #c45407 100%);
+  padding: 75px 0 85px 0;
+  background: linear-gradient(135deg, #df7218 0%, #ea5f0c 45%, #c84d00 100%);
   color: #ffffff;
-  padding: 50px 0;
   position: relative;
   overflow: hidden;
 
-  // Background organic speckles/lighting
   &::before {
     content: '';
     position: absolute;
@@ -15,72 +14,138 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.12) 0%, transparent 35%),
-                radial-gradient(circle at 90% 80%, rgba(0, 0, 0, 0.1) 0%, transparent 40%);
+    background: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(0, 0, 0, 0.12) 0%, transparent 40%);
     pointer-events: none;
+  }
+
+  .section-header-white {
+    text-align: center;
+    max-width: 750px;
+    margin: 0 auto 48px auto;
+    position: relative;
+    z-index: 2;
+
+    .badge-white {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      padding: 6px 20px;
+      border-radius: 30px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: 2.35rem;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.35;
+      margin-bottom: 12px;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+
+      @media (max-width: 768px) {
+        font-size: 1.75rem;
+      }
+    }
+
+    .section-subtitle {
+      font-size: 1.05rem;
+      color: #fff0e6;
+      line-height: 1.6;
+    }
   }
 
   .prep-grid {
     display: grid;
     grid-template-columns: 0.9fr 1.1fr;
-    gap: 36px;
+    gap: 48px;
     align-items: center;
     position: relative;
     z-index: 2;
 
-    @media (max-width: 868px) {
+    @media (max-width: 992px) {
       grid-template-columns: 1fr;
-      text-align: center;
-      gap: 30px;
+      gap: 40px;
     }
   }
 
+  // Left Bowl Visual Wrap
   .bowl-visual-wrap {
     display: flex;
     justify-content: center;
 
-    .bowl-image-frame {
+    .bowl-card-outer {
       position: relative;
-      max-width: 330px;
+      max-width: 360px;
       width: 100%;
-      border-radius: 50%;
-      padding: 10px;
-      background: rgba(255, 255, 255, 0.2);
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.25);
-      animation: floatGentle 4s ease-in-out infinite;
 
-      img {
-        width: 100%;
-        height: 100%;
+      .bowl-image-frame {
         border-radius: 50%;
-        object-fit: cover;
+        overflow: hidden;
+        border: 6px solid rgba(255, 255, 255, 0.35);
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
+        aspect-ratio: 1 / 1;
+        animation: floatGentle 5s infinite ease-in-out;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      .bowl-floating-tag {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #ffffff;
+        color: $accent-orange-dark;
+        font-weight: 700;
+        font-size: 0.88rem;
+        padding: 8px 18px;
+        border-radius: 30px;
+        box-shadow: $shadow-md;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        white-space: nowrap;
       }
     }
   }
 
+  // Right Instructions Card
   .prep-instruction-card {
-    background: rgba(255, 255, 255, 0.95);
-    color: $text-dark;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    border: 1.5px solid rgba(255, 255, 255, 0.3);
+    border-radius: 24px;
     padding: 32px 30px;
-    border-radius: 18px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.22);
-    border: 2px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
 
     @media (max-width: 600px) {
       padding: 24px 18px;
     }
 
-    .prep-card-title {
-      font-size: 1.8rem;
-      font-weight: 800;
-      color: $primary-green-dark;
-      margin-bottom: 20px;
+    .prep-card-header {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      padding-bottom: 14px;
 
-      @media (max-width: 868px) {
-        justify-content: center;
+      .icon-utensils {
+        color: #ffd166;
+      }
+
+      .card-title-text {
+        font-size: 1.45rem;
+        font-weight: 800;
+        color: #ffffff;
       }
     }
 
@@ -88,47 +153,75 @@
       display: flex;
       flex-direction: column;
       gap: 16px;
+      margin-bottom: 24px;
 
-      .step-item {
+      .step-card {
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 16px 18px;
         display: flex;
         align-items: flex-start;
-        gap: 14px;
-        text-align: left;
+        gap: 16px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.25s ease;
 
-        .step-number {
+        &:hover {
+          transform: translateX(4px);
+        }
+
+        .step-number-badge {
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
           background: $accent-orange;
-          color: #fff;
+          color: #ffffff;
           font-weight: 800;
           font-size: 0.95rem;
-          min-width: 28px;
-          height: 28px;
-          border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
           flex-shrink: 0;
-          margin-top: 2px;
-          box-shadow: 0 3px 8px rgba(234, 95, 12, 0.4);
+          box-shadow: 0 4px 10px rgba(234, 95, 12, 0.35);
         }
 
-        .step-text {
-          font-size: 1.08rem;
-          line-height: 1.6;
-          color: #2c382b;
-          font-weight: 500;
+        .step-content {
+          .step-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: $text-dark;
+            margin-bottom: 4px;
+            line-height: 1.3;
+          }
+
+          .step-desc {
+            font-size: 0.88rem;
+            color: #4b5563;
+            line-height: 1.5;
+          }
         }
       }
     }
 
-    .prep-tip {
-      margin-top: 18px;
-      background: #fff8f0;
-      border-left: 4px solid $accent-orange;
-      padding: 10px 14px;
-      border-radius: 6px;
-      font-size: 0.92rem;
-      color: #7c2d12;
-      font-weight: 600;
+    // Special Pro Tip Card
+    .prep-tip-card {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 14px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.9rem;
+      line-height: 1.55;
+      color: #fff4ec;
+
+      .tip-icon {
+        font-size: 1.25rem;
+      }
+
+      strong {
+        color: #ffd166;
+      }
     }
   }
 }
