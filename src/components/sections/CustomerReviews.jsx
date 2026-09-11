@@ -2,89 +2,64 @@
 
 import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
-import { Star, ChevronLeft, ChevronRight, CheckCircle2, Sparkles, MessageCircle, Heart, Quote } from 'lucide-react';
+import { Star, ChevronLeft, ChevronRight, Sparkles, X, ZoomIn } from 'lucide-react';
 
 export default function CustomerReviews() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
-  const [currentTranslate, setCurrentTranslate] = useState(0);
-  const [prevTranslate, setPrevTranslate] = useState(0);
+  const [selectedImage, setSelectedImage] = useState(null);
   const sliderRef = useRef(null);
 
-  const reviewCards = [
+  const reviews = [
     {
       id: 1,
-      name: 'মোঃ তানভীর আহমেদ',
-      location: 'মিরপুর, ঢাকা',
-      rating: 5,
-      date: '২ দিন আগে',
-      feedbackText: 'আলহামদুলিল্লাহ, ১ মাস খাওয়ার পর শরীরের দুর্বলতা আর ক্লান্তি একদম দূর হয়ে গেছে। বাদাম ও সিডসগুলো সত্যিই প্রিমিয়াম ও ফ্রেশ!',
-      highlight: 'শারীরিক দুর্বলতা দূর',
-      badge: 'Verified Buyer',
-      jarImg: '/images/smd-jar.jpg'
+      image: '/images/review-1.jpg',
+      title: 'তানভীর আহমেদ - ঢাকা',
+      badge: 'Verified Buyer (৫/৫)'
     },
     {
       id: 2,
-      name: 'ফারহানা ইসলাম',
-      location: 'ধানমন্ডি, ঢাকা',
-      rating: 5,
-      date: '৪ দিন আগে',
-      feedbackText: 'বাচ্চার খাওয়ার রুচি এবং মেধার বিকাশে দারুণ ফল পেয়েছি। প্রতিদিন সকালে দুধের সাথে ১ চামচ মিশিয়ে দেই, ও খুব মজা করে খায়!',
-      highlight: 'বাচ্চাদের মেধা ও পুষ্টি',
-      badge: 'Family Pack Buyer',
-      jarImg: '/images/smd-jar.jpg'
+      image: '/images/review-2.jpg',
+      title: 'ফারহানা ইসলাম - ধানমন্ডি',
+      badge: 'Family Pack Review (৫/৫)'
     },
     {
       id: 3,
-      name: 'ইঞ্জিঃ মাহমুদুল হাসান',
-      location: 'জিইসি মোড়, চট্টগ্রাম',
-      rating: 5,
-      date: '১ সপ্তাহ আগে',
-      feedbackText: 'ক্যাশ অন ডেলিভারিতে কোনো অগ্রিম টাকা ছাড়াই পেয়েছি। প্যাকেজিং খুবই ভালো ছিল এবং প্রোডাক্ট ১০০% অরিজিনাল। ধন্যবাদ SMD!',
-      highlight: 'ক্যাশ অন ডেলিভারি',
-      badge: 'Verified Customer',
-      jarImg: '/images/smd-jar.jpg'
+      image: '/images/review-3.jpg',
+      title: 'ইঞ্জিঃ মাহমুদুল হাসান - চট্টগ্রাম',
+      badge: 'Cash on Delivery (৫/৫)'
     },
     {
       id: 4,
-      name: 'ডাঃ রাশেদুল করিম',
-      location: 'রাজশাহী সদর',
-      rating: 5,
-      date: '২ সপ্তাহ আগে',
-      feedbackText: 'প্রাকৃতিক ওমেগা-৩ এবং অ্যান্টি-অক্সিডেন্টের চমৎকার কম্বিনেশন। পরিবারের সবার রোগ প্রতিরোধ ক্ষমতা বাড়াতে এটি একটি পারফেক্ট সুপারফুড।',
-      highlight: 'ডাক্তারের পরামর্শ',
-      badge: 'Health Expert',
-      jarImg: '/images/smd-jar.jpg'
+      image: '/images/review-4.jpg',
+      title: 'ডাঃ রাশেদুল করিম - রাজশাহী',
+      badge: 'Expert Review (৫/৫)'
     },
     {
       id: 5,
-      name: 'সালমা আক্তার',
-      location: 'উপশহর, সিলেট',
-      rating: 5,
-      date: '৩ সপ্তাহ আগে',
-      feedbackText: 'হজম শক্তি অনেক বৃদ্ধি পেয়েছে ও গ্যাস্ট্রিকের সমস্যা অনেক কমেছে। প্রোডাক্টের স্বাদও অসাধারণ। আবারো ২ জার অর্ডার করেছি!',
-      highlight: 'হজম শক্তি উন্নত',
-      badge: 'Repeat Buyer',
-      jarImg: '/images/smd-jar.jpg'
+      image: '/images/review-5.jpg',
+      title: 'সালমা আক্তার - সিলেট',
+      badge: 'Repeat Customer (৫/৫)'
     }
   ];
 
-  const totalSlides = reviewCards.length;
+  const total = reviews.length;
 
+  // Next / Prev 1 slide at a time
   const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % totalSlides);
+    setCurrentIndex((prev) => (prev + 1) % total);
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - 1 + totalSlides) % totalSlides);
+    setCurrentIndex((prev) => (prev - 1 + total) % total);
   };
 
-  const goToSlide = (idx) => {
-    setCurrentIndex(idx);
+  const goToSlide = (index) => {
+    setCurrentIndex(index);
   };
 
-  // Drag / Swipe handlers
+  // Mouse & Touch Drag Handlers
   const handleTouchStart = (e) => {
     setIsDragging(true);
     setStartX(e.touches[0].clientX);
@@ -94,10 +69,10 @@ export default function CustomerReviews() {
     if (!isDragging) return;
     const currentX = e.touches[0].clientX;
     const diff = currentX - startX;
-    if (diff > 50) {
+    if (diff > 45) {
       prevSlide();
       setIsDragging(false);
-    } else if (diff < -50) {
+    } else if (diff < -45) {
       nextSlide();
       setIsDragging(false);
     }
@@ -115,10 +90,10 @@ export default function CustomerReviews() {
   const handleMouseMove = (e) => {
     if (!isDragging) return;
     const diff = e.clientX - startX;
-    if (diff > 60) {
+    if (diff > 50) {
       prevSlide();
       setIsDragging(false);
-    } else if (diff < -60) {
+    } else if (diff < -50) {
       nextSlide();
       setIsDragging(false);
     }
@@ -135,7 +110,7 @@ export default function CustomerReviews() {
         <div className="section-header">
           <div className="badge-tag-center">
             <Sparkles size={16} />
-            <span>সন্তুষ্ট গ্রাহকদের অভিজ্ঞতা</span>
+            <span>১০০% খাঁটি কাস্টমার রিভিউ</span>
           </div>
           <h2 className="review-title">
             আমাদের কাস্টমাররা <span className="highlight-green">কী বলছেন?</span>
@@ -149,25 +124,25 @@ export default function CustomerReviews() {
                   <Star key={i} size={18} fill="#f59e0b" color="#f59e0b" />
                 ))}
               </div>
-              <span className="count-text">৩,৫০০+ ভেরিফাইড গ্রাহকের রিভিউ ও রেটিং</span>
+              <span className="count-text">৩,৫০০+ সন্তুষ্ট গ্রাহকের বাস্তব রিভিউ ও মতামত</span>
             </div>
           </div>
         </div>
 
-        {/* Draggable Slider Wrapper */}
-        <div className="slider-outer-container">
-          {/* Previous Arrow Button */}
+        {/* 3-Card Carousel Container */}
+        <div className="multi-card-slider-wrapper">
+          {/* Navigation Arrows */}
           <button
-            className="slider-nav-btn prev-btn"
+            className="slider-arrow-btn prev-arrow"
             onClick={prevSlide}
             aria-label="Previous review"
           >
-            <ChevronLeft size={26} />
+            <ChevronLeft size={28} />
           </button>
 
-          {/* Draggable Carousel Track */}
+          {/* Draggable Viewport */}
           <div
-            className="slider-draggable-viewport"
+            className="slider-viewport"
             ref={sliderRef}
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
@@ -179,71 +154,39 @@ export default function CustomerReviews() {
             style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
           >
             <div
-              className="slider-track"
+              className="slider-grid-track"
               style={{
-                transform: `translateX(-${currentIndex * 100}%)`,
-                transition: 'transform 0.45s cubic-bezier(0.25, 1, 0.5, 1)'
+                transform: `translateX(calc(-${currentIndex} * (100% / 3 + 6.66px)))`,
+                transition: isDragging ? 'none' : 'transform 0.45s cubic-bezier(0.25, 1, 0.5, 1)'
               }}
             >
-              {reviewCards.map((rev) => (
-                <div className="slider-item" key={rev.id}>
-                  {/* Visual Customer Feedback Card Mockup */}
-                  <div className="feedback-graphic-card">
-                    {/* Top Branding Banner */}
-                    <div className="card-brand-header">
-                      <div className="smd-mini-logo">
-                        <span className="smd-box">SMD</span>
-                        <span className="smd-title">HEALTHY MIX</span>
-                      </div>
-                      <div className="cursive-tag">
-                        <span>Customer Feedback</span>
+              {reviews.map((rev, idx) => (
+                <div
+                  className="review-image-slide"
+                  key={rev.id}
+                  onClick={() => setSelectedImage(rev.image)}
+                >
+                  <div className="review-image-card">
+                    <div className="image-frame">
+                      <Image
+                        src={rev.image}
+                        alt={rev.title}
+                        width={360}
+                        height={360}
+                        priority={idx < 3}
+                      />
+                      <div className="zoom-hint">
+                        <ZoomIn size={20} />
+                        <span>বড় করে দেখুন</span>
                       </div>
                     </div>
-
-                    {/* Card Body: Jar on Left + WhatsApp Review on Right */}
-                    <div className="card-body-grid">
-                      {/* Product Jar Frame */}
-                      <div className="product-jar-frame">
-                        <div className="jar-glow-bg"></div>
-                        <Image
-                          src={rev.jarImg}
-                          alt="SMD Healthy Mix Customer Review"
-                          width={140}
-                          height={140}
-                          priority
-                        />
-                        <span className="organic-seal">১০০% খাঁটি</span>
+                    <div className="review-card-footer">
+                      <div className="stars-footer">
+                        {[...Array(5)].map((_, i) => (
+                          <Star key={i} size={14} fill="#f59e0b" color="#f59e0b" />
+                        ))}
                       </div>
-
-                      {/* Chat / Feedback Bubble */}
-                      <div className="chat-bubble-frame">
-                        <div className="chat-header">
-                          <div className="user-info">
-                            <span className="user-name">{rev.name}</span>
-                            <span className="user-location">{rev.location}</span>
-                          </div>
-                          <span className="chat-time">{rev.date}</span>
-                        </div>
-
-                        <div className="stars-row">
-                          {[...Array(rev.rating)].map((_, i) => (
-                            <Star key={i} size={15} fill="#f59e0b" color="#f59e0b" />
-                          ))}
-                          <span className="verified-pill">
-                            <CheckCircle2 size={13} /> {rev.badge}
-                          </span>
-                        </div>
-
-                        <div className="chat-message">
-                          <Quote size={18} className="quote-icon" />
-                          <p className="message-text">"{rev.feedbackText}"</p>
-                        </div>
-
-                        <div className="feedback-tag-row">
-                          <span className="highlight-pill">✓ {rev.highlight}</span>
-                          <span className="offline-seal">★ Offline Verified Review</span>
-                        </div>
-                      </div>
+                      <span className="verified-seal">{rev.badge}</span>
                     </div>
                   </div>
                 </div>
@@ -251,34 +194,33 @@ export default function CustomerReviews() {
             </div>
           </div>
 
-          {/* Next Arrow Button */}
           <button
-            className="slider-nav-btn next-btn"
+            className="slider-arrow-btn next-arrow"
             onClick={nextSlide}
             aria-label="Next review"
           >
-            <ChevronRight size={26} />
+            <ChevronRight size={28} />
           </button>
         </div>
 
         {/* Pagination Dots */}
-        <div className="slider-pagination-dots">
-          {reviewCards.map((_, idx) => (
+        <div className="slider-dots-row">
+          {reviews.map((_, idx) => (
             <button
               key={idx}
-              className={`pagination-dot ${currentIndex === idx ? 'active' : ''}`}
+              className={`dot-pill ${currentIndex === idx ? 'active' : ''}`}
               onClick={() => goToSlide(idx)}
-              aria-label={`Go to slide ${idx + 1}`}
+              aria-label={`Slide ${idx + 1}`}
             ></button>
           ))}
         </div>
 
-        {/* Drag Hint on Mobile/Desktop */}
-        <div className="drag-swipe-hint">
-          <span>👈 ড্র্যাগ বা সোয়াইপ করে অন্যান্য রিভিউগুলো দেখুন 👉</span>
-        </div>
+        {/* Swipe Hint */}
+        <p className="slider-swipe-hint">
+          👈 ড্র্যাগ বা অ্যারো দিয়ে এক এক করে সবগুলো রিভিউ দেখুন 👉
+        </p>
 
-        {/* Social Proof Counters */}
+        {/* Social Proof Counter Banner */}
         <div className="social-proof-bar">
           <div className="proof-item">
             <strong>৩,২০০+</strong>
@@ -296,6 +238,29 @@ export default function CustomerReviews() {
           </div>
         </div>
       </div>
+
+      {/* Full Size Image Preview Modal */}
+      {selectedImage && (
+        <div className="image-lightbox-backdrop" onClick={() => setSelectedImage(null)}>
+          <div className="image-lightbox-inner" onClick={(e) => e.stopPropagation()}>
+            <button
+              className="lightbox-close-btn"
+              onClick={() => setSelectedImage(null)}
+              aria-label="Close image"
+            >
+              <X size={24} />
+            </button>
+            <div className="lightbox-image-wrap">
+              <Image
+                src={selectedImage}
+                alt="Customer Review Full Size"
+                width={720}
+                height={720}
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
