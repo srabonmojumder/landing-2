@@ -1,3 +1,4 @@
+import TopNoticeBar from '@/components/layout/TopNoticeBar';
 import HeroVideoSection from '@/components/sections/HeroVideoSection';
 import ProductHighlight from '@/components/sections/ProductHighlight';
 import BenefitsSection from '@/components/sections/BenefitsSection';
@@ -11,7 +12,8 @@ import FloatingActions from '@/components/layout/FloatingActions';
 
 export default function Home() {
   return (
-    <main>
+    <main className="landing-wrapper">
+      <TopNoticeBar />
       <HeroVideoSection />
       <ProductHighlight />
       <BenefitsSection />
