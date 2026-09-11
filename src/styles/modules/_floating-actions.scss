@@ -1,0 +1,44 @@
+@use "../abstracts/tokens" as *;
+
+.floating-action-buttons {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 99;
+
+  .float-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 18px;
+    border-radius: 50px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.95rem;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    transition: all $transition-bounce;
+
+    &:hover {
+      transform: translateY(-4px) scale(1.05);
+    }
+
+    &.whatsapp-btn {
+      background: #25d366;
+    }
+
+    &.call-btn {
+      background: #ea5f0c;
+    }
+
+    @media (max-width: 600px) {
+      padding: 10px 14px;
+      font-size: 0.85rem;
+      span {
+        display: none;
+      }
+    }
+  }
+}

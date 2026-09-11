@@ -1,0 +1,513 @@
+@use "../abstracts/tokens" as *;
+
+.order-form-section {
+  padding: 50px 0 70px 0;
+  background: linear-gradient(180deg, #f5f9f3 0%, #eaf1e7 100%);
+  position: relative;
+
+  .order-form-container {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .section-title-wrap {
+    text-align: center;
+    margin-bottom: 36px;
+
+    .badge {
+      background: $accent-orange;
+      color: #fff;
+      font-size: 1.5rem;
+      font-weight: 800;
+      padding: 10px 32px;
+      border-radius: 8px;
+      box-shadow: $shadow-orange;
+      display: inline-block;
+    }
+
+    .sub-note {
+      margin-top: 10px;
+      font-size: 1rem;
+      color: $text-muted;
+    }
+  }
+
+  // Package Selector Cards
+  .packages-selection-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 30px;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .package-card {
+    background: #ffffff;
+    border: 2px solid $border-color;
+    border-radius: 14px;
+    padding: 18px;
+    cursor: pointer;
+    transition: all $transition-smooth;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &:hover {
+      border-color: $primary-green-light;
+      transform: translateY(-2px);
+    }
+
+    &.selected {
+      border-color: $primary-green;
+      background: #fbfdfa;
+      box-shadow: 0 8px 24px rgba(79, 116, 71, 0.18);
+
+      .radio-circle {
+        border-color: $primary-green;
+
+        &::after {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+    }
+
+    .pkg-ribbon {
+      position: absolute;
+      top: -10px;
+      right: 12px;
+      background: $accent-orange;
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      box-shadow: 0 2px 8px rgba(234, 95, 12, 0.3);
+    }
+
+    .pkg-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+
+      .radio-circle {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        border: 2px solid #cbd5e1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+
+        &::after {
+          content: '';
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          background: $primary-green;
+          opacity: 0;
+          transform: scale(0);
+          transition: all 0.2s ease;
+        }
+      }
+
+      .pkg-title {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: $text-dark;
+      }
+    }
+
+    .pkg-price-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-top: 6px;
+
+      .pkg-price {
+        font-size: 1.45rem;
+        font-weight: 800;
+        color: $primary-green;
+      }
+
+      .pkg-savings {
+        font-size: 0.8rem;
+        color: #16a34a;
+        font-weight: 700;
+        background: #dcfce7;
+        padding: 2px 8px;
+        border-radius: 4px;
+      }
+    }
+  }
+
+  // Main Checkout Form Layout
+  .form-and-summary-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 28px;
+
+    @media (max-width: 868px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .form-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 26px;
+    box-shadow: $shadow-sm;
+    border: 1px solid $border-color;
+
+    .card-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: $text-dark;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid $border-light;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+
+      label {
+        display: block;
+        font-size: 0.98rem;
+        font-weight: 600;
+        color: $text-dark;
+        margin-bottom: 8px;
+
+        .required {
+          color: #dc2626;
+          margin-left: 2px;
+        }
+      }
+
+      input, textarea {
+        width: 100%;
+        padding: 12px 16px;
+        border-radius: 10px;
+        border: 1.5px solid #d6e2d3;
+        font-size: 1rem;
+        color: $text-dark;
+        background: #fdfdfd;
+        transition: border-color $transition-fast, box-shadow $transition-fast;
+
+        &:focus {
+          border-color: $primary-green;
+          background: #ffffff;
+          box-shadow: 0 0 0 3px rgba(79, 116, 71, 0.15);
+        }
+
+        &::placeholder {
+          color: #94a3b8;
+          font-size: 0.92rem;
+        }
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 80px;
+      }
+    }
+
+    .shipping-selector {
+      margin-top: 20px;
+
+      .shipping-title {
+        font-size: 0.98rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: $text-dark;
+      }
+
+      .shipping-options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .shipping-radio-label {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 16px;
+        border-radius: 10px;
+        border: 1.5px solid #d6e2d3;
+        background: #fdfdfd;
+        cursor: pointer;
+        transition: all $transition-fast;
+
+        &:hover {
+          border-color: $primary-green-light;
+        }
+
+        &.active {
+          border-color: $primary-green;
+          background: #f3f8f1;
+        }
+
+        .radio-left {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          font-weight: 600;
+          font-size: 0.96rem;
+        }
+
+        .shipping-charge {
+          font-weight: 700;
+          color: $primary-green;
+        }
+      }
+    }
+  }
+
+  // Summary Card
+  .summary-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 26px;
+    box-shadow: $shadow-sm;
+    border: 1px solid $border-color;
+    height: fit-content;
+
+    .summary-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: $text-dark;
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid $border-light;
+    }
+
+    .selected-product-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding-bottom: 16px;
+      margin-bottom: 16px;
+      border-bottom: 1px dashed $border-light;
+
+      .product-thumb {
+        width: 56px;
+        height: 56px;
+        border-radius: 10px;
+        background: #f5f9f3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+      }
+
+      .product-info {
+        flex-grow: 1;
+
+        .name {
+          font-weight: 700;
+          font-size: 1.05rem;
+          color: $text-dark;
+        }
+
+        .qty-ctrl {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          background: #f1f5ef;
+          padding: 3px 8px;
+          border-radius: 6px;
+          margin-top: 4px;
+          font-size: 0.9rem;
+
+          button {
+            font-weight: 800;
+            color: $primary-green;
+            width: 20px;
+            text-align: center;
+          }
+        }
+      }
+
+      .price {
+        font-weight: 800;
+        font-size: 1.15rem;
+        color: $primary-green;
+      }
+    }
+
+    .calculation-breakdown {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 18px;
+
+      .calc-row {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.98rem;
+        color: #555;
+
+        &.total-row {
+          font-size: 1.3rem;
+          font-weight: 800;
+          color: $text-dark;
+          border-top: 2px solid $border-color;
+          padding-top: 12px;
+          margin-top: 4px;
+
+          .total-amount {
+            color: $accent-orange;
+          }
+        }
+      }
+    }
+
+    .payment-note-box {
+      background: #f0f7ee;
+      border: 1px solid #c9dec6;
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 20px;
+      font-size: 0.88rem;
+      color: $primary-green-dark;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+    }
+
+    .submit-order-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #4f7447 0%, #3e6137 100%);
+      color: #ffffff;
+      font-size: 1.25rem;
+      font-weight: 800;
+      padding: 16px 20px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: $shadow-green;
+      transition: all $transition-bounce;
+
+      &:hover:not(:disabled) {
+        transform: translateY(-2px);
+        background: linear-gradient(135deg, #5b8552 0%, #466e3e 100%);
+        box-shadow: 0 10px 25px rgba(79, 116, 71, 0.45);
+      }
+
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  // Order Confirmation Success Modal
+  .order-modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .order-modal-card {
+    background: #ffffff;
+    border-radius: 20px;
+    max-width: 520px;
+    width: 100%;
+    padding: 36px 28px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    position: relative;
+    animation: bounceIn 0.5s ease;
+
+    .modal-success-icon {
+      width: 72px;
+      height: 72px;
+      background: #dcfce7;
+      color: #16a34a;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 18px auto;
+    }
+
+    .modal-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: $primary-green-dark;
+      margin-bottom: 8px;
+    }
+
+    .modal-subtitle {
+      font-size: 1.05rem;
+      color: $text-muted;
+      margin-bottom: 22px;
+    }
+
+    .order-invoice-details {
+      background: #f8faf7;
+      border-radius: 12px;
+      padding: 16px;
+      text-align: left;
+      margin-bottom: 24px;
+      border: 1px solid $border-color;
+      font-size: 0.94rem;
+
+      .detail-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 6px;
+
+        &:last-child {
+          margin-bottom: 0;
+          font-weight: 700;
+          border-top: 1px dashed #cbd5e1;
+          padding-top: 8px;
+          margin-top: 8px;
+        }
+      }
+    }
+
+    .close-modal-btn {
+      background: $primary-green;
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.1rem;
+      padding: 12px 32px;
+      border-radius: 30px;
+      transition: background $transition-fast;
+
+      &:hover {
+        background: $primary-green-dark;
+      }
+    }
+  }
+}

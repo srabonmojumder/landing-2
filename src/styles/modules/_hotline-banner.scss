@@ -1,0 +1,70 @@
+@use "../abstracts/tokens" as *;
+
+.hotline-banner-section {
+  padding: 10px 0 45px 0;
+  background: $bg-white;
+
+  .hotline-card {
+    background: linear-gradient(135deg, #4f7447 0%, #35532f 100%);
+    border-radius: 16px;
+    padding: 30px 24px;
+    text-align: center;
+    color: #ffffff;
+    box-shadow: $shadow-green;
+    position: relative;
+    overflow: hidden;
+
+    .hotline-heading {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 20px;
+
+      @media (max-width: 600px) {
+        font-size: 1.5rem;
+      }
+    }
+
+    .phone-btn-wrap {
+      display: inline-flex;
+      justify-content: center;
+    }
+
+    .phone-action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(135deg, #f97316 0%, #ea5f0c 100%);
+      color: #ffffff;
+      font-size: 1.45rem;
+      font-weight: 800;
+      padding: 14px 38px;
+      border-radius: 50px;
+      box-shadow: $shadow-orange;
+      letter-spacing: 0.5px;
+      font-family: $font-sans;
+      transition: all $transition-bounce;
+
+      &:hover {
+        transform: scale(1.05);
+        background: linear-gradient(135deg, #fb923c 0%, #f97316 100%);
+        box-shadow: 0 12px 30px rgba(234, 95, 12, 0.5);
+      }
+
+      .phone-icon-pulse {
+        animation: pulse 1.5s infinite;
+      }
+
+      @media (max-width: 600px) {
+        font-size: 1.2rem;
+        padding: 12px 28px;
+      }
+    }
+
+    .hotline-subtext {
+      margin-top: 14px;
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.85);
+    }
+  }
+}
