@@ -1,0 +1,47 @@
+// Theme Colors (Matching the Organic Green & Warm Orange Landing Palette)
+$primary-green: #4f7447;
+$primary-green-dark: #375331;
+$primary-green-light: #6a9660;
+$primary-green-bg: #eaf1e8;
+$primary-green-soft: #f4f8f3;
+
+$accent-orange: #ea5f0c;
+$accent-orange-dark: #cc4e04;
+$accent-orange-light: #ff7728;
+$accent-orange-bg: #fff4ec;
+
+$accent-gold: #d99814;
+$accent-gold-light: #fef3c7;
+
+// Neutrals
+$bg-white: #ffffff;
+$bg-light: #f9fbf8;
+$bg-cream: #faf7f2;
+$bg-dark: #1e281b;
+
+$text-dark: #1d261c;
+$text-body: #334031;
+$text-muted: #647562;
+$text-light: #ffffff;
+
+$border-color: #e2ebe0;
+$border-light: #eef3ec;
+$border-accent: rgba(234, 95, 12, 0.25);
+
+// Elevation Shadows
+$shadow-xs: 0 2px 8px rgba(35, 55, 30, 0.06);
+$shadow-sm: 0 4px 16px rgba(35, 55, 30, 0.08);
+$shadow-md: 0 10px 30px rgba(35, 55, 30, 0.12);
+$shadow-lg: 0 18px 45px rgba(35, 55, 30, 0.18);
+$shadow-orange: 0 8px 25px rgba(234, 95, 12, 0.35);
+$shadow-green: 0 8px 25px rgba(79, 116, 71, 0.35);
+
+// Typography
+$font-sans: 'Plus Jakarta Sans', 'Outfit', 'Inter', sans-serif;
+$font-heading: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+$font-bangla: 'Hind Siliguri', 'Noto Sans Bengali', 'Anek Bangla', 'Plus Jakarta Sans', sans-serif;
+
+// Transitions
+$transition-fast: 0.2s ease;
+$transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+$transition-bounce: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
