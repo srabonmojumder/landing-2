@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { 
   ShieldCheck, 
   Heart, 
@@ -15,7 +15,8 @@ import {
 } from 'lucide-react';
 
 export default function BenefitsSection() {
-  const [activeIngredient, setActiveIngredient] = useState('কাঠবাদাম (Almond) - ভিটামিন ই ও স্বাস্থ্যকর ফ্যাটি অ্যাসিড সমৃদ্ধ');
+  const [activeIngredient, setActiveIngredient] = useState('কাঠবাদাম - ভিটামিন ই, ম্যাগনেসিয়াম ও ব্রেন বুস্টিং পুষ্টি');
+  const [isHovered, setIsHovered] = useState(false);
 
   const benefitsList = [
     {
@@ -71,6 +72,21 @@ export default function BenefitsSection() {
     { name: 'কিশমিশ ও খেজুর', color: '#7f4f24', desc: 'ন্যাচারাল গ্লুকোজ, আয়রন ও রক্তস্বল্পতা দূরকারী' }
   ];
 
+  // Auto-cycle ingredients as the wheel rotates like a clock
+  useEffect(() => {
+    if (isHovered) return;
+    const interval = setInterval(() => {
+      setActiveIngredient((prev) => {
+        const currentIdx = ingredients.findIndex((item) => `${item.name} - ${item.desc}` === prev);
+        const nextIdx = (currentIdx + 1) % ingredients.length;
+        const nextItem = ingredients[nextIdx];
+        return `${nextItem.name} - ${nextItem.desc}`;
+      });
+    }, 3500);
+
+    return () => clearInterval(interval);
+  }, [isHovered, ingredients]);
+
   const scrollToOrder = (e) => {
     e.preventDefault();
     const target = document.getElementById('order-form');
@@ -119,7 +135,16 @@ export default function BenefitsSection() {
               <span>২০টি উপাদানের পুষ্টি বিন্যাস</span>
             </div>
 
-            <div className="wheel-container">
+            <div
+              className="wheel-container"
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+            >
+              {/* Top Clock Indicator Pointer */}
+              <div className="clock-pointer" aria-hidden="true">
+                <div className="pointer-arrow"></div>
+              </div>
+
               <svg className="pie-svg-chart" viewBox="0 0 300 300">
                 <defs>
                   <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
@@ -189,6 +214,7 @@ export default function BenefitsSection() {
 
               {/* Center Circle Badge */}
               <div className="wheel-center-badge">
+                <div className="clock-center-pin" aria-hidden="true"></div>
                 <span className="brand-badge-top">SMD</span>
                 <span className="brand-title">হেলদি মিক্স</span>
                 <span className="sub">১০০% ন্যাচারাল</span>

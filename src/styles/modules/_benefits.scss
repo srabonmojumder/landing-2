@@ -155,23 +155,51 @@
       width: 280px;
       height: 280px;
       margin: 0 auto 20px auto;
+      border-radius: 50%;
+      box-shadow: 0 0 0 6px #f0fdf4, 0 0 0 9px rgba(34, 197, 94, 0.2), 0 14px 34px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
 
       @media (max-width: 480px) {
         width: 250px;
         height: 250px;
       }
 
+      &:hover .pie-svg-chart {
+        animation-play-state: paused;
+      }
+
+      .clock-pointer {
+        position: absolute;
+        top: -12px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10;
+        pointer-events: none;
+        filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.3));
+
+        .pointer-arrow {
+          width: 0;
+          height: 0;
+          border-left: 9px solid transparent;
+          border-right: 9px solid transparent;
+          border-top: 17px solid $accent-orange;
+          border-radius: 2px;
+        }
+      }
+
       .pie-svg-chart {
         width: 100%;
         height: 100%;
         overflow: visible;
+        transform-origin: 50% 50%;
+        animation: clockRotate 26s linear infinite;
+        will-change: transform;
 
         .slice-group {
-          transition: transform 0.25s ease;
+          transition: filter 0.2s ease, opacity 0.2s ease;
 
           &:hover {
-            transform: scale(1.04);
-            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+            filter: brightness(1.1) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.25));
           }
         }
       }
@@ -192,6 +220,16 @@
         align-items: center;
         justify-content: center;
         pointer-events: none;
+        z-index: 5;
+
+        .clock-center-pin {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: $accent-orange;
+          margin-bottom: 2px;
+          box-shadow: 0 0 8px rgba(242, 95, 12, 0.7);
+        }
 
         .brand-badge-top {
           font-size: 0.85rem;
@@ -213,6 +251,15 @@
           font-weight: 700;
           margin-top: 2px;
         }
+      }
+    }
+
+    @keyframes clockRotate {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
       }
     }
 
