@@ -45,7 +45,7 @@ export default function FloatingActions() {
           className="sticky-order-btn pulsing"
         >
           <ShoppingBag size={20} />
-          <span>অর্ডার করুন (৳১০৫০)</span>
+          <span>এখনই অর্ডার করুন</span>
         </a>
         <a
           href="tel:01821982435"

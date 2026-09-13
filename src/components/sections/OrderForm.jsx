@@ -129,26 +129,55 @@ export default function OrderForm() {
             <h3 className="step-title">আপনার পছন্দের প্যাকেজ সিলেক্ট করুন:</h3>
           </div>
 
-          <div className="packages-selection-grid">
+          <div className="packages-selection-grid" role="radiogroup" aria-label="প্যাকেজ নির্বাচন">
             {packages.map((pkg) => {
               const isSelected = selectedPackage === pkg.id;
               return (
-                <div
+                <label
                   key={pkg.id}
+                  htmlFor={`pkg-radio-${pkg.id}`}
                   className={`package-card ${isSelected ? 'selected' : ''}`}
                   onClick={() => {
                     setSelectedPackage(pkg.id);
                     setQuantity(1);
                   }}
+                  role="radio"
+                  aria-checked={isSelected}
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === ' ' || e.key === 'Enter') {
+                      e.preventDefault();
+                      setSelectedPackage(pkg.id);
+                      setQuantity(1);
+                    }
+                  }}
                 >
+                  <input
+                    type="radio"
+                    id={`pkg-radio-${pkg.id}`}
+                    name="selectedPackage"
+                    value={pkg.id}
+                    checked={isSelected}
+                    onChange={() => {
+                      setSelectedPackage(pkg.id);
+                      setQuantity(1);
+                    }}
+                    className="sr-only-radio"
+                  />
+
                   {pkg.ribbon && <div className="pkg-ribbon">{pkg.ribbon}</div>}
 
                   <div className="pkg-card-top">
-                    <div className="custom-radio">
-                      <div className="radio-dot"></div>
+                    <div className={`custom-radio ${isSelected ? 'radio-checked' : ''}`}>
+                      <div className="radio-dot">
+                        {isSelected && <Check size={12} strokeWidth={3.5} color="#ffffff" />}
+                      </div>
                     </div>
-                    <div>
-                      <h4 className="pkg-title">{pkg.name}</h4>
+                    <div className="pkg-title-wrap">
+                      <div className="title-and-check">
+                        <h4 className="pkg-title">{pkg.name}</h4>
+                        {isSelected && <span className="selected-tag-badge">✓ সিলেক্টেড</span>}
+                      </div>
                       <p className="pkg-sub">{pkg.subtitle}</p>
                     </div>
                   </div>
@@ -160,7 +189,7 @@ export default function OrderForm() {
                     </div>
                     <span className="pkg-savings-pill">{pkg.savings}</span>
                   </div>
-                </div>
+                </label>
               );
             })}
           </div>

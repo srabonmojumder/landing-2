@@ -1,15 +1,21 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import { Star, ChevronLeft, ChevronRight, Sparkles, X, ZoomIn } from 'lucide-react';
 
 export default function CustomerReviews() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [cardsPerView, setCardsPerView] = useState(3);
   const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
+  const [dragOffset, setDragOffset] = useState(0);
+  const [hasMoved, setHasMoved] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
-  const sliderRef = useRef(null);
+
+  const startXRef = useRef(0);
+  const touchStartYRef = useRef(0);
+  const isHorizontalSwipeRef = useRef(null);
 
   const reviews = [
     {
@@ -44,64 +50,167 @@ export default function CustomerReviews() {
     }
   ];
 
+  // Dynamic cards per view
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 640) {
+        setCardsPerView(1);
+      } else if (window.innerWidth <= 992) {
+        setCardsPerView(2);
+      } else {
+        setCardsPerView(3);
+      }
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const total = reviews.length;
+  const maxIndex = Math.max(0, total - cardsPerView);
 
-  // Next / Prev 1 slide at a time
-  const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % total);
-  };
+  // Clamp currentIndex when screen size changes
+  useEffect(() => {
+    if (currentIndex > maxIndex) {
+      setCurrentIndex(maxIndex);
+    }
+  }, [maxIndex, currentIndex]);
 
-  const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - 1 + total) % total);
-  };
+  const nextSlide = useCallback(() => {
+    setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+  }, [maxIndex]);
+
+  const prevSlide = useCallback(() => {
+    setCurrentIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
+  }, [maxIndex]);
 
   const goToSlide = (index) => {
-    setCurrentIndex(index);
+    setCurrentIndex(Math.min(index, maxIndex));
   };
 
-  // Mouse & Touch Drag Handlers
+  // Autoplay with pause on hover/interaction
+  useEffect(() => {
+    if (isDragging || isHovered || selectedImage) return;
+    const timer = setInterval(() => {
+      nextSlide();
+    }, 4500);
+    return () => clearInterval(timer);
+  }, [isDragging, isHovered, selectedImage, nextSlide]);
+
+  // Touch handlers
   const handleTouchStart = (e) => {
+    startXRef.current = e.touches[0].clientX;
+    touchStartYRef.current = e.touches[0].clientY;
+    isHorizontalSwipeRef.current = null;
     setIsDragging(true);
-    setStartX(e.touches[0].clientX);
+    setHasMoved(false);
+    setDragOffset(0);
   };
 
   const handleTouchMove = (e) => {
     if (!isDragging) return;
     const currentX = e.touches[0].clientX;
-    const diff = currentX - startX;
-    if (diff > 45) {
-      prevSlide();
-      setIsDragging(false);
-    } else if (diff < -45) {
-      nextSlide();
-      setIsDragging(false);
+    const currentY = e.touches[0].clientY;
+    const diffX = currentX - startXRef.current;
+    const diffY = currentY - touchStartYRef.current;
+
+    if (isHorizontalSwipeRef.current === null) {
+      if (Math.abs(diffX) > 8 || Math.abs(diffY) > 8) {
+        isHorizontalSwipeRef.current = Math.abs(diffX) > Math.abs(diffY);
+      }
+    }
+
+    if (isHorizontalSwipeRef.current) {
+      setDragOffset(diffX);
+      if (Math.abs(diffX) > 6) {
+        setHasMoved(true);
+      }
     }
   };
 
   const handleTouchEnd = () => {
-    setIsDragging(false);
-  };
-
-  const handleMouseDown = (e) => {
-    setIsDragging(true);
-    setStartX(e.clientX);
-  };
-
-  const handleMouseMove = (e) => {
     if (!isDragging) return;
-    const diff = e.clientX - startX;
-    if (diff > 50) {
-      prevSlide();
-      setIsDragging(false);
-    } else if (diff < -50) {
-      nextSlide();
-      setIsDragging(false);
+    if (isHorizontalSwipeRef.current) {
+      if (dragOffset < -45) {
+        nextSlide();
+      } else if (dragOffset > 45) {
+        prevSlide();
+      }
     }
+    setIsDragging(false);
+    setDragOffset(0);
+    setTimeout(() => {
+      setHasMoved(false);
+    }, 100);
   };
 
-  const handleMouseUp = () => {
-    setIsDragging(false);
+  // Mouse drag handlers (window listeners during drag)
+  const handleMouseDown = (e) => {
+    if (e.button !== 0) return;
+    setIsDragging(true);
+    startXRef.current = e.clientX;
+    setHasMoved(false);
+    setDragOffset(0);
   };
+
+  useEffect(() => {
+    if (!isDragging) return;
+
+    const handleMouseMove = (e) => {
+      const diff = e.clientX - startXRef.current;
+      setDragOffset(diff);
+      if (Math.abs(diff) > 6) {
+        setHasMoved(true);
+      }
+    };
+
+    const handleMouseUp = (e) => {
+      const diff = e.clientX - startXRef.current;
+      if (diff < -45) {
+        nextSlide();
+      } else if (diff > 45) {
+        prevSlide();
+      }
+      setIsDragging(false);
+      setDragOffset(0);
+      setTimeout(() => {
+        setHasMoved(false);
+      }, 100);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', handleMouseUp);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [isDragging, nextSlide, prevSlide]);
+
+  // Click card to zoom (only if not dragged)
+  const handleCardClick = (image) => {
+    if (hasMoved) return;
+    setSelectedImage(image);
+  };
+
+  // Lightbox keyboard and scroll lock
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setSelectedImage(null);
+      }
+    };
+    if (selectedImage) {
+      window.addEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = '';
+    };
+  }, [selectedImage]);
 
   return (
     <section className="customer-reviews-section" id="reviews">
@@ -130,9 +239,14 @@ export default function CustomerReviews() {
         </div>
 
         {/* 3-Card Carousel Container */}
-        <div className="multi-card-slider-wrapper">
+        <div
+          className="multi-card-slider-wrapper"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
           {/* Navigation Arrows */}
           <button
+            type="button"
             className="slider-arrow-btn prev-arrow"
             onClick={prevSlide}
             aria-label="Previous review"
@@ -143,20 +257,16 @@ export default function CustomerReviews() {
           {/* Draggable Viewport */}
           <div
             className="slider-viewport"
-            ref={sliderRef}
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
             onMouseDown={handleMouseDown}
-            onMouseMove={handleMouseMove}
-            onMouseUp={handleMouseUp}
-            onMouseLeave={handleMouseUp}
             style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
           >
             <div
               className="slider-grid-track"
               style={{
-                transform: `translateX(calc(-${currentIndex} * (100% / 3 + 6.66px)))`,
+                transform: `translateX(calc(-1 * ${currentIndex} * (100% + 16px) / ${cardsPerView} + ${dragOffset}px))`,
                 transition: isDragging ? 'none' : 'transform 0.45s cubic-bezier(0.25, 1, 0.5, 1)'
               }}
             >
@@ -164,7 +274,14 @@ export default function CustomerReviews() {
                 <div
                   className="review-image-slide"
                   key={rev.id}
-                  onClick={() => setSelectedImage(rev.image)}
+                  onClick={() => handleCardClick(rev.image)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      handleCardClick(rev.image);
+                    }
+                  }}
                 >
                   <div className="review-image-card">
                     <div className="image-frame">
@@ -174,6 +291,7 @@ export default function CustomerReviews() {
                         width={360}
                         height={360}
                         priority={idx < 3}
+                        draggable={false}
                       />
                       <div className="zoom-hint">
                         <ZoomIn size={20} />
@@ -195,6 +313,7 @@ export default function CustomerReviews() {
           </div>
 
           <button
+            type="button"
             className="slider-arrow-btn next-arrow"
             onClick={nextSlide}
             aria-label="Next review"
@@ -205,7 +324,7 @@ export default function CustomerReviews() {
 
         {/* Pagination Dots */}
         <div className="slider-dots-row">
-          {reviews.map((_, idx) => (
+          {Array.from({ length: maxIndex + 1 }).map((_, idx) => (
             <button
               key={idx}
               className={`dot-pill ${currentIndex === idx ? 'active' : ''}`}

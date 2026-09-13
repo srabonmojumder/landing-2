@@ -69,6 +69,7 @@
     max-width: 1100px;
     margin: 0 auto 20px auto;
     padding: 0 20px;
+    user-select: none;
 
     .slider-arrow-btn {
       position: absolute;
@@ -95,6 +96,10 @@
         transform: translateY(-50%) scale(1.1);
       }
 
+      &:active {
+        transform: translateY(-50%) scale(0.95);
+      }
+
       &.prev-arrow {
         left: -10px;
         @media (max-width: 768px) { left: 2px; }
@@ -103,6 +108,11 @@
       &.next-arrow {
         right: -10px;
         @media (max-width: 768px) { right: 2px; }
+      }
+
+      @media (max-width: 640px) {
+        width: 38px;
+        height: 38px;
       }
     }
   }
@@ -114,17 +124,22 @@
     border-radius: 20px;
     padding: 10px 0;
     user-select: none;
+    touch-action: pan-y;
   }
 
   .slider-grid-track {
     display: flex;
     gap: 16px;
     width: 100%;
+    will-change: transform;
   }
 
   .review-image-slide {
     flex: 0 0 calc((100% - 32px) / 3);
+    min-width: 0;
     cursor: pointer;
+    user-select: none;
+    -webkit-user-drag: none;
 
     @media (max-width: 992px) {
       flex: 0 0 calc((100% - 16px) / 2);
@@ -168,6 +183,9 @@
         height: 100%;
         object-fit: cover;
         transition: transform 0.35s ease;
+        user-select: none;
+        -webkit-user-drag: none;
+        pointer-events: none;
       }
 
       &:hover img {
@@ -190,6 +208,7 @@
         gap: 5px;
         opacity: 0;
         transition: opacity 0.25s ease;
+        pointer-events: none;
       }
     }
 
