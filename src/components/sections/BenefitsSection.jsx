@@ -223,8 +223,10 @@ export default function BenefitsSection() {
 
             {/* Hover Tooltip / Detail */}
             <div className="ingredient-tooltip">
-              <Sparkles size={16} color="#ea5f0c" />
-              <span>{activeIngredient}</span>
+              <Sparkles size={16} className="tooltip-sparkle-icon" />
+              <span key={activeIngredient} className="tooltip-text-fade">
+                {activeIngredient}
+              </span>
             </div>
 
             {/* Micro badges under wheel */}
