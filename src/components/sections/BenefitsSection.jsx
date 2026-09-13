@@ -15,7 +15,7 @@ import {
 } from 'lucide-react';
 
 export default function BenefitsSection() {
-  const [activeIngredient, setActiveIngredient] = useState('কাঠবাদাম - ভিটামিন ই, ম্যাগনেসিয়াম ও ব্রেন বুস্টিং পুষ্টি');
+  const [activeIdx, setActiveIdx] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
 
   const benefitsList = [
@@ -72,20 +72,15 @@ export default function BenefitsSection() {
     { name: 'কিশমিশ ও খেজুর', color: '#7f4f24', desc: 'ন্যাচারাল গ্লুকোজ, আয়রন ও রক্তস্বল্পতা দূরকারী' }
   ];
 
-  // Auto-cycle ingredients as the wheel rotates like a clock
+  // Auto-cycle slices clockwise like a clock
   useEffect(() => {
     if (isHovered) return;
     const interval = setInterval(() => {
-      setActiveIngredient((prev) => {
-        const currentIdx = ingredients.findIndex((item) => `${item.name} - ${item.desc}` === prev);
-        const nextIdx = (currentIdx + 1) % ingredients.length;
-        const nextItem = ingredients[nextIdx];
-        return `${nextItem.name} - ${nextItem.desc}`;
-      });
-    }, 3500);
+      setActiveIdx((prev) => (prev + 1) % ingredients.length);
+    }, 2500);
 
     return () => clearInterval(interval);
-  }, [isHovered, ingredients]);
+  }, [isHovered, ingredients.length]);
 
   const scrollToOrder = (e) => {
     e.preventDefault();
@@ -140,11 +135,6 @@ export default function BenefitsSection() {
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
             >
-              {/* Top Clock Indicator Pointer */}
-              <div className="clock-pointer" aria-hidden="true">
-                <div className="pointer-arrow"></div>
-              </div>
-
               <svg className="pie-svg-chart" viewBox="0 0 300 300">
                 <defs>
                   <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
@@ -179,27 +169,33 @@ export default function BenefitsSection() {
                   const tx = cx + textR * Math.cos(midRad);
                   const ty = cy + textR * Math.sin(midRad);
 
+                  const isActive = activeIdx === idx;
+
                   return (
                     <g
-                      key={idx}
-                      onClick={() => setActiveIngredient(`${item.name} - ${item.desc}`)}
-                      onMouseEnter={() => setActiveIngredient(`${item.name} - ${item.desc}`)}
+                      key={item.name}
+                      onClick={() => setActiveIdx(idx)}
+                      onMouseEnter={() => {
+                        setActiveIdx(idx);
+                        setIsHovered(true);
+                      }}
+                      onMouseLeave={() => setIsHovered(false)}
                       style={{ cursor: 'pointer' }}
-                      className="slice-group"
+                      className={`slice-group ${isActive ? 'active-slice' : ''}`}
                     >
                       <path
                         d={pathData}
                         fill={item.color}
                         stroke="#ffffff"
-                        strokeWidth="3.5"
-                        opacity={0.92}
+                        strokeWidth={isActive ? '4' : '3.5'}
+                        opacity={isActive ? 1 : 0.9}
                         className="pie-slice"
                       />
                       <text
                         x={tx}
                         y={ty}
                         fill="#ffffff"
-                        fontSize="9.5"
+                        fontSize={isActive ? "10" : "9.5"}
                         fontWeight="700"
                         textAnchor="middle"
                         dominantBaseline="middle"
@@ -214,7 +210,6 @@ export default function BenefitsSection() {
 
               {/* Center Circle Badge */}
               <div className="wheel-center-badge">
-                <div className="clock-center-pin" aria-hidden="true"></div>
                 <span className="brand-badge-top">SMD</span>
                 <span className="brand-title">হেলদি মিক্স</span>
                 <span className="sub">১০০% ন্যাচারাল</span>
@@ -224,8 +219,8 @@ export default function BenefitsSection() {
             {/* Hover Tooltip / Detail */}
             <div className="ingredient-tooltip">
               <Sparkles size={16} className="tooltip-sparkle-icon" />
-              <span key={activeIngredient} className="tooltip-text-fade">
-                {activeIngredient}
+              <span key={activeIdx} className="tooltip-text-fade">
+                {ingredients[activeIdx].name} - {ingredients[activeIdx].desc}
               </span>
             </div>
 
