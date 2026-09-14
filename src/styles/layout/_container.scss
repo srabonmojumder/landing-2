@@ -1,8 +1,8 @@
 .container {
-  max-width: 1080px;
+  max-width: 1240px;
   width: 100%;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 24px;
   box-sizing: border-box;
 
   @media (max-width: 768px) {
@@ -11,7 +11,7 @@
 }
 
 .container-narrow {
-  max-width: 860px;
+  max-width: 960px;
   width: 100%;
   margin: 0 auto;
   padding: 0 20px;
