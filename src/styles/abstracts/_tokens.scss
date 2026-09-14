@@ -1,46 +1,51 @@
 // Theme Colors (Modern Rich Organic Emerald & High-Converting Radiant Orange)
-$primary-green: #3b6b33;
-$primary-green-dark: #274b21;
-$primary-green-deep: #1b3816;
-$primary-green-light: #528c46;
-$primary-green-bg: #f0f6ef;
-$primary-green-soft: #f8faf7;
+$primary-green: #2a6f3b;
+$primary-green-dark: #1b4d27;
+$primary-green-deep: #0f2e17;
+$primary-green-light: #3d8c52;
+$primary-green-bg: #edf7ef;
+$primary-green-soft: #f4faf4;
 
-$accent-orange: #f25f0c;
-$accent-orange-dark: #cc4900;
-$accent-orange-light: #ff7824;
-$accent-orange-gradient: linear-gradient(135deg, #ff7e29 0%, #f25f0c 50%, #d64800 100%);
-$accent-orange-bg: #fff5ee;
+$accent-orange: #ea580c;
+$accent-orange-dark: #c2410c;
+$accent-orange-light: #f97316;
+$accent-orange-gradient: linear-gradient(135deg, #f97316 0%, #ea580c 55%, #c2410c 100%);
+$accent-orange-bg: #fff7ed;
 
 $accent-gold: #f59e0b;
 $accent-gold-light: #fef3c7;
 
 // Neutrals & Surfaces
 $bg-white: #ffffff;
-$bg-light: #f9fbf8;
+$bg-light: #f8faf7;
 $bg-cream: #faf7f2;
 $bg-card: rgba(255, 255, 255, 0.96);
-$bg-dark: #121c10;
+$bg-dark: #0f1c11;
 
-$text-dark: #142011;
-$text-heading: #1e2e1b;
-$text-body: #32432e;
-$text-muted: #62755e;
+$text-dark: #111e12;
+$text-heading: #182a1a;
+$text-body: #2d3e2c;
+$text-muted: #5e735d;
 $text-light: #ffffff;
 
-$border-color: #e2ede0;
+$border-color: #e2ede1;
 $border-light: #edf4eb;
-$border-accent: rgba(242, 95, 12, 0.25);
-$border-green: rgba(59, 107, 51, 0.2);
+$border-accent: rgba(234, 88, 12, 0.25);
+$border-green: rgba(42, 111, 59, 0.18);
 
-// Elevation Shadows
-$shadow-xs: 0 2px 8px rgba(25, 45, 20, 0.05);
-$shadow-sm: 0 4px 16px rgba(25, 45, 20, 0.08);
-$shadow-md: 0 10px 30px rgba(25, 45, 20, 0.12);
-$shadow-lg: 0 18px 45px rgba(25, 45, 20, 0.16);
-$shadow-xl: 0 25px 60px rgba(25, 45, 20, 0.22);
-$shadow-orange: 0 10px 32px rgba(242, 95, 12, 0.42);
-$shadow-green: 0 10px 30px rgba(59, 107, 51, 0.35);
+// Glassmorphism
+$glass-bg: rgba(255, 255, 255, 0.88);
+$glass-border: 1px solid rgba(255, 255, 255, 0.65);
+$glass-blur: blur(14px);
+
+// Elevation Shadows (Layered Multi-Depth)
+$shadow-xs: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+$shadow-sm: 0 4px 14px -2px rgba(20, 45, 25, 0.06), 0 2px 6px -1px rgba(0, 0, 0, 0.04);
+$shadow-md: 0 8px 26px -4px rgba(20, 45, 25, 0.08), 0 4px 12px -2px rgba(0, 0, 0, 0.04);
+$shadow-lg: 0 16px 40px -6px rgba(20, 45, 25, 0.11), 0 8px 18px -4px rgba(0, 0, 0, 0.05);
+$shadow-xl: 0 24px 54px -12px rgba(20, 45, 25, 0.15), 0 12px 24px -6px rgba(0, 0, 0, 0.07);
+$shadow-orange: 0 10px 28px -4px rgba(234, 88, 12, 0.42), 0 4px 12px -2px rgba(234, 88, 12, 0.22);
+$shadow-green: 0 10px 28px -4px rgba(42, 111, 59, 0.32), 0 4px 12px -2px rgba(42, 111, 59, 0.18);
 
 // Typography
 $font-sans: 'Plus Jakarta Sans', 'Outfit', 'Inter', sans-serif;
@@ -50,4 +55,4 @@ $font-bangla: 'Hind Siliguri', 'Noto Sans Bengali', 'Anek Bangla', sans-serif;
 // Transitions
 $transition-fast: 0.2s ease;
 $transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-$transition-bounce: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+$transition-bounce: 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
