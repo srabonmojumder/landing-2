@@ -26,7 +26,7 @@ export default function PreparationSection() {
     <section className="preparation-section">
       <div className="container">
         {/* Section Header */}
-        <div className="section-header-white">
+        <div className="section-header-white reveal-up">
           <span className="badge-white">সহজ প্রস্তুত প্রণালী</span>
           <h2 className="section-title">
             মাত্র ২ মিনিটে তৈরি করুন পুষ্টির সেরা ড্রিংক
@@ -38,7 +38,7 @@ export default function PreparationSection() {
 
         <div className="prep-grid">
           {/* Left Bowl Visual */}
-          <div className="bowl-visual-wrap">
+          <div className="bowl-visual-wrap reveal-left">
             <div className="bowl-card-outer">
               <div className="bowl-image-frame">
                 <Image
@@ -46,10 +46,10 @@ export default function PreparationSection() {
                   alt="Delicious healthy mix bowl preparation"
                   width={400}
                   height={400}
-                  priority
+                  loading="lazy"
                 />
               </div>
-              <div className="bowl-floating-tag">
+              <div className="bowl-floating-tag float-subtle">
                 <Heart size={16} fill="#ea5f0c" color="#ea5f0c" />
                 <span>সুস্বাদু ও সহজে হজমযোগ্য</span>
               </div>
@@ -57,7 +57,7 @@ export default function PreparationSection() {
           </div>
 
           {/* Right Instructions Card */}
-          <div className="prep-instruction-card">
+          <div className="prep-instruction-card reveal-right delay-200">
             <div className="prep-card-header">
               <Utensils size={24} className="icon-utensils" />
               <h3 className="card-title-text">খাওয়ার সহজ নিয়মাবলী:</h3>
@@ -65,7 +65,7 @@ export default function PreparationSection() {
 
             <div className="prep-steps-list">
               {steps.map((step, idx) => (
-                <div className="step-card" key={idx}>
+                <div className={`step-card stagger-card delay-${(idx + 1) * 150}`} key={idx}>
                   <div className="step-number-badge">{step.num}</div>
                   <div className="step-content">
                     <h4 className="step-title">{step.title}</h4>
@@ -76,7 +76,7 @@ export default function PreparationSection() {
             </div>
 
             {/* Special Tip Card */}
-            <div className="prep-tip-card">
+            <div className="prep-tip-card reveal-up delay-400">
               <div className="tip-icon">💡</div>
               <div className="tip-content">
                 <strong>পুষ্টিবিদদের বিশেষ পরামর্শ:</strong>

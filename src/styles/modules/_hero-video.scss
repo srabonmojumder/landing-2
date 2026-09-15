@@ -9,6 +9,10 @@
   position: relative;
   overflow: hidden;
 
+  @media (max-width: 768px) {
+    padding: 34px 0 65px 0;
+  }
+
   // Background subtle organic pattern & ambient lights
   &::before {
     content: '';
@@ -47,6 +51,12 @@
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
     letter-spacing: 0.01em;
 
+    @media (max-width: 480px) {
+      font-size: 0.85rem;
+      padding: 6px 14px;
+      margin-bottom: 16px;
+    }
+
     .sparkle-anim {
       color: #ffd166;
       animation: pulseGlow 2s infinite ease-in-out;
@@ -55,7 +65,7 @@
 
   // Main Headline
   .hero-title {
-    font-size: clamp(1.85rem, 4.2vw, 2.85rem);
+    font-size: clamp(1.58rem, 4.2vw, 2.85rem);
     font-weight: 800;
     color: $text-light;
     margin-bottom: 18px;

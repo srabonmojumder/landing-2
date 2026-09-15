@@ -21,27 +21,27 @@ export default function HeroVideoSection() {
         <div className="container">
           <div className="hero-content">
             {/* Top Quality Badge */}
-            <div className="hero-badge">
+            <div className="hero-badge reveal-up">
               <Sparkles size={16} className="sparkle-anim" />
               <span>১০০% প্রাকৃতিক ও প্রিমিয়াম প্রোটিন ফর্মুলা</span>
             </div>
 
             {/* Main Headline */}
-            <h1 className="hero-title">
+            <h1 className="hero-title reveal-up delay-100">
               প্রোটিন সমৃদ্ধ সুপার ফুড <span className="highlight-text">SMD হেলদি মিক্স</span>
             </h1>
 
             {/* Sub-headline */}
-            <p className="hero-subtitle">
+            <p className="hero-subtitle reveal-up delay-200">
               ২০টি প্রিমিয়াম উপাদান ও বাদামের অনন্য মিশ্রণ — শরীরের শক্তি, রোগ প্রতিরোধ ক্ষমতা ও দৈনন্দিন কর্মক্ষমতা বাড়ানোর প্রাকৃতিক সমাধান!
             </p>
 
             {/* Main CTA */}
-            <div className="cta-wrapper">
+            <div className="cta-wrapper reveal-up delay-250">
               <a
                 href="#order-form"
                 onClick={scrollToOrder}
-                className="btn-cta-orange pulsing"
+                className="btn-cta-orange pulsing glow-pulse"
               >
                 <span>অগ্রিম পেমেন্ট ছাড়াই অর্ডার করুন</span>
                 <ArrowRight size={20} className="arrow-icon" />
@@ -49,7 +49,7 @@ export default function HeroVideoSection() {
             </div>
 
             {/* Trust Highlights under CTA */}
-            <div className="hero-trust-row">
+            <div className="hero-trust-row reveal-up delay-300">
               <div className="trust-pill">
                 <Truck size={15} />
                 <span>সারাদেশে ক্যাশ অন ডেলিভারি</span>
@@ -69,7 +69,7 @@ export default function HeroVideoSection() {
             </div>
 
             {/* Video Showcase Card */}
-            <div className="video-card-container">
+            <div className="video-card-container reveal-scale delay-350">
               <div
                 className="video-thumbnail-wrapper"
                 onClick={() => setIsVideoOpen(true)}

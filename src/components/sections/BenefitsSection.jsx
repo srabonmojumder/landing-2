@@ -94,7 +94,7 @@ export default function BenefitsSection() {
     <section className="benefits-section" id="benefits">
       <div className="container">
         {/* Section Header */}
-        <div className="section-header">
+        <div className="section-header reveal-up">
           <div className="section-title-wrap">
             <span className="main-badge">উপকারিতা ও পুষ্টিগুণ</span>
           </div>
@@ -109,9 +109,9 @@ export default function BenefitsSection() {
         {/* 2 Column Content */}
         <div className="benefits-grid">
           {/* Left Checklist Cards */}
-          <div className="benefits-cards-list">
+          <div className="benefits-cards-list reveal-left">
             {benefitsList.map((benefit, index) => (
-              <div className="benefit-card-item" key={index}>
+              <div className={`benefit-card-item stagger-card delay-${Math.min((index % 4 + 1) * 100, 400)}`} key={index}>
                 <div className="card-icon-box">
                   {benefit.icon}
                 </div>
@@ -124,7 +124,7 @@ export default function BenefitsSection() {
           </div>
 
           {/* Right Ingredients Wheel Card */}
-          <div className="ingredients-wheel-card">
+          <div className="ingredients-wheel-card reveal-right delay-200">
             <div className="wheel-header">
               <Sparkles size={18} className="icon-sparkle" />
               <span>২০টি উপাদানের পুষ্টি বিন্যাস</span>
@@ -234,11 +234,11 @@ export default function BenefitsSection() {
         </div>
 
         {/* Bottom CTA Button */}
-        <div className="cta-bottom-wrap">
+        <div className="cta-bottom-wrap reveal-up">
           <a
             href="#order-form"
             onClick={scrollToOrder}
-            className="btn-cta-orange pulsing"
+            className="btn-cta-orange pulsing glow-pulse"
           >
             <span>অগ্রিম পেমেন্ট ছাড়াই অর্ডার করুন</span>
             <ArrowRight size={20} />

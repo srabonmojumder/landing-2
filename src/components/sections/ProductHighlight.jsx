@@ -24,7 +24,7 @@ export default function ProductHighlight() {
       <div className="container">
         <div className="highlight-grid">
           {/* Left Details */}
-          <div className="product-details">
+          <div className="product-details reveal-left">
             <div className="badge-tag">
               <Sparkles size={16} />
               <span>১০০% প্রাকৃতিক ও খাঁটি সুপার ফুড</span>
@@ -41,7 +41,7 @@ export default function ProductHighlight() {
             {/* 4 Highlights Grid */}
             <div className="highlight-features-grid">
               {features.map((f, i) => (
-                <div className="feature-chip" key={i}>
+                <div className={`feature-chip stagger-card delay-${(i + 1) * 100}`} key={i}>
                   <div className="chip-icon">{f.icon}</div>
                   <div className="chip-content">
                     <strong className="chip-title">{f.title}</strong>
@@ -52,7 +52,7 @@ export default function ProductHighlight() {
             </div>
 
             {/* Price Box */}
-            <div className="price-container-card">
+            <div className="price-container-card reveal-up delay-200">
               <div className="price-row-top">
                 <span className="price-label">আজকের অফার মূল্য:</span>
                 <span className="discount-tag">৩০০৳ সাশ্রয়</span>
@@ -67,11 +67,11 @@ export default function ProductHighlight() {
             </div>
 
             {/* Actions */}
-            <div className="cta-container">
+            <div className="cta-container reveal-up delay-300">
               <a
                 href="#order-form"
                 onClick={scrollToOrder}
-                className="btn-cta-orange pulsing"
+                className="btn-cta-orange pulsing glow-pulse"
               >
                 <span>অগ্রিম পেমেন্ট ছাড়াই অর্ডার করুন</span>
                 <ArrowRight size={18} />
@@ -130,7 +130,7 @@ export default function ProductHighlight() {
           </div>
 
           {/* Right Product Jar */}
-          <div className="product-image-card">
+          <div className="product-image-card reveal-right delay-200">
             <div className="image-aura-bg"></div>
             <div className="image-wrapper">
               <Image
@@ -141,7 +141,7 @@ export default function ProductHighlight() {
                 priority
               />
 
-              <div className="floating-pill top-right">
+              <div className="floating-pill top-right float-subtle">
                 <CheckCircle2 size={18} className="icon-green" />
                 <div>
                   <strong>২০টি উপাদান</strong>
@@ -149,7 +149,7 @@ export default function ProductHighlight() {
                 </div>
               </div>
 
-              <div className="floating-pill bottom-left">
+              <div className="floating-pill bottom-left float-subtle delay-200">
                 <Award size={18} className="icon-orange" />
                 <div>
                   <strong>১০০% খাঁটি গ্যারান্টি</strong>
@@ -157,7 +157,7 @@ export default function ProductHighlight() {
                 </div>
               </div>
 
-              <div className="floating-pill bottom-right">
+              <div className="floating-pill bottom-right float-subtle delay-400">
                 <ShieldCheck size={18} className="icon-blue" />
                 <div>
                   <strong>ক্যাশ অন ডেলিভারি</strong>
