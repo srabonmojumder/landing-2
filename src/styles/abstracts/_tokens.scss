@@ -48,9 +48,9 @@ $shadow-orange: 0 10px 28px -4px rgba(234, 88, 12, 0.42), 0 4px 12px -2px rgba(2
 $shadow-green: 0 10px 28px -4px rgba(42, 111, 59, 0.32), 0 4px 12px -2px rgba(42, 111, 59, 0.18);
 
 // Typography
-$font-sans: 'Plus Jakarta Sans', 'Outfit', 'Inter', sans-serif;
-$font-heading: 'Hind Siliguri', 'Noto Sans Bengali', 'Outfit', sans-serif;
-$font-bangla: 'Hind Siliguri', 'Noto Sans Bengali', 'Anek Bangla', sans-serif;
+$font-sans: var(--font-outfit), 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+$font-heading: var(--font-hind-siliguri), 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
+$font-bangla: var(--font-hind-siliguri), 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
 
 // Transitions
 $transition-fast: 0.2s ease;
