@@ -9,10 +9,12 @@ import HotlineBanner from '@/components/sections/HotlineBanner';
 import OrderForm from '@/components/sections/OrderForm';
 import Footer from '@/components/layout/Footer';
 import FloatingActions from '@/components/layout/FloatingActions';
+import ScrollRevealObserver from '@/components/common/ScrollRevealObserver';
 
 export default function Home() {
   return (
     <main className="landing-wrapper">
+      <ScrollRevealObserver />
       <TopNoticeBar />
       <HeroVideoSection />
       <ProductHighlight />
