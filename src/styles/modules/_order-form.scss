@@ -102,6 +102,11 @@
       user-select: none;
       -webkit-tap-highlight-color: transparent;
 
+      @media (max-width: 600px) {
+        padding: 16px 14px;
+        border-radius: 16px;
+      }
+
       &:hover {
         border-color: rgba(42, 111, 59, 0.4);
         transform: translateY(-4px);

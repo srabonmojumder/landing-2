@@ -110,7 +110,7 @@ export default function OrderForm() {
       <div className="container">
         <div className="order-form-container">
           {/* Section Header */}
-          <div className="section-title-wrap">
+          <div className="section-title-wrap reveal-up">
             <div className="order-badge">
               <Sparkles size={16} />
               <span>সহজ ১-স্টেপ অর্ডার ফর্ম</span>
@@ -124,7 +124,7 @@ export default function OrderForm() {
           </div>
 
           {/* Package Selection */}
-          <div className="package-selector-header">
+          <div className="package-selector-header reveal-up delay-100">
             <span className="step-tag">ধাপ ১</span>
             <h3 className="step-title">আপনার পছন্দের প্যাকেজ সিলেক্ট করুন:</h3>
           </div>
@@ -136,7 +136,7 @@ export default function OrderForm() {
                 <label
                   key={pkg.id}
                   htmlFor={`pkg-radio-${pkg.id}`}
-                  className={`package-card ${isSelected ? 'selected' : ''}`}
+                  className={`package-card stagger-card delay-${pkg.id * 100} ${isSelected ? 'selected' : ''}`}
                   onClick={() => {
                     setSelectedPackage(pkg.id);
                     setQuantity(1);
@@ -195,14 +195,14 @@ export default function OrderForm() {
           </div>
 
           {/* Step 2: Information & Summary */}
-          <div className="package-selector-header" style={{ marginTop: '36px' }}>
+          <div className="package-selector-header reveal-up delay-150" style={{ marginTop: '36px' }}>
             <span className="step-tag">ধাপ ২</span>
             <h3 className="step-title">আপনার ডেলিভারির ঠিকানা ও সামারি:</h3>
           </div>
 
           <div className="form-and-summary-grid">
             {/* Left: Billing Info */}
-            <div className="form-card">
+            <div className="form-card reveal-left delay-200">
               <div className="form-card-head">
                 <Truck size={22} className="icon-green" />
                 <h4 className="card-head-text">ডেলিভারি তথ্য</h4>
@@ -299,7 +299,7 @@ export default function OrderForm() {
             </div>
 
             {/* Right: Order Summary */}
-            <div className="summary-card">
+            <div className="summary-card reveal-right delay-200">
               <h4 className="summary-title">অর্ডার সামারি</h4>
 
               <div className="selected-product-box">
@@ -376,7 +376,7 @@ export default function OrderForm() {
               {/* High Impact Submit Button */}
               <button
                 type="button"
-                className="submit-order-btn pulsing"
+                className="submit-order-btn pulsing glow-pulse"
                 onClick={handleSubmit}
                 disabled={isSubmitting}
               >

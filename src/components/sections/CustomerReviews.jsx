@@ -216,7 +216,7 @@ export default function CustomerReviews() {
     <section className="customer-reviews-section" id="reviews">
       <div className="container">
         {/* Section Header */}
-        <div className="section-header">
+        <div className="section-header reveal-up">
           <div className="badge-tag-center">
             <Sparkles size={16} />
             <span>১০০% খাঁটি কাস্টমার রিভিউ</span>
@@ -225,7 +225,7 @@ export default function CustomerReviews() {
             আমাদের কাস্টমাররা <span className="highlight-green">কী বলছেন?</span>
           </h2>
           
-          <div className="rating-summary-card">
+          <div className="rating-summary-card reveal-up delay-100">
             <div className="rating-num">৪.৯</div>
             <div className="rating-details">
               <div className="stars-row">
@@ -240,7 +240,7 @@ export default function CustomerReviews() {
 
         {/* 3-Card Carousel Container */}
         <div
-          className="multi-card-slider-wrapper"
+          className="multi-card-slider-wrapper reveal-scale delay-150"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
@@ -340,7 +340,7 @@ export default function CustomerReviews() {
         </p>
 
         {/* Social Proof Counter Banner */}
-        <div className="social-proof-bar">
+        <div className="social-proof-bar reveal-up delay-200">
           <div className="proof-item">
             <strong>৩,২০০+</strong>
             <span>সফল ডেলিভারি</span>

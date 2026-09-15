@@ -24,7 +24,7 @@ export default function TrustGuarantees() {
   return (
     <section className="trust-guarantees-section">
       <div className="container">
-        <div className="trust-banner-card">
+        <div className="trust-banner-card reveal-scale">
           <div className="banner-top-badge">
             <Award size={16} />
             <span>আমাদের গ্রাহক প্রতিশ্রুতি</span>
@@ -39,7 +39,7 @@ export default function TrustGuarantees() {
 
           <div className="guarantee-grid">
             {guarantees.map((item, index) => (
-              <div className="guarantee-card" key={index}>
+              <div className={`guarantee-card stagger-card delay-${(index + 1) * 150}`} key={index}>
                 <div className="icon-wrapper">
                   {item.icon}
                 </div>

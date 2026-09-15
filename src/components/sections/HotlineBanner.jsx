@@ -6,7 +6,7 @@ export default function HotlineBanner() {
   return (
     <section className="hotline-banner-section">
       <div className="container">
-        <div className="hotline-card">
+        <div className="hotline-card reveal-up">
           <div className="hotline-left">
             <div className="hotline-badge">
               <Headphones size={16} />
