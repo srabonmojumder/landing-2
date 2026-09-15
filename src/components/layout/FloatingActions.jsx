@@ -42,7 +42,7 @@ export default function FloatingActions() {
         <a
           href="#order-form"
           onClick={scrollToOrder}
-          className="sticky-order-btn pulsing"
+          className="sticky-order-btn pulsing glow-pulse"
         >
           <ShoppingBag size={20} />
           <span>এখনই অর্ডার করুন</span>
